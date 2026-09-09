@@ -358,6 +358,13 @@ export function createApp(deps: AppDeps) {
       }
       repo.updateSession(s.row.id, { status: 'report_ready' });
       repo.markReportEmailSent(activeReport.id);
+      if (consents.some((p) => p !== 'report_delivery')) {
+        await email.sendConsentConfirmation({
+          to: contact.email_normalized,
+          language: row_lang(s.row),
+          purposes: consents.filter((p) => p !== 'report_delivery'),
+        });
+      }
       analytics.track('delivery_selected', {
         emailYesNo: 'yes',
         consentFlags: consents.join(','),
@@ -466,6 +473,16 @@ export function createApp(deps: AppDeps) {
         'SELECT DISTINCT contact_id AS cid FROM consents WHERE session_id = ? AND contact_id IS NOT NULL',
       )
       .all(sessionId) as Array<{ cid: string }>;
+    // deletion receipt to the contact before records are removed (PRD §17.3)
+    for (const { cid } of contactIds) {
+      const contact = cid ? repo.getContact(cid) : undefined;
+      if (contact) {
+        await email.sendDeletionReceipt({
+          to: contact.email_normalized,
+          language: row.language as 'en' | 'zh-CN',
+        });
+      }
+    }
     repo.deleteSession(sessionId);
     for (const { cid } of contactIds) {
       const stillLinked = repo.db
@@ -527,6 +544,10 @@ export function createApp(deps: AppDeps) {
 }
 
 /* ------------------------- helpers ------------------------- */
+
+function row_lang(row: SessionRow): 'en' | 'zh-CN' {
+  return row.language as 'en' | 'zh-CN';
+}
 
 function latestDeliveryContact(repo: Repo, sessionId: string) {
   const rows = repo.db
