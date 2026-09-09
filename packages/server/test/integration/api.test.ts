@@ -427,3 +427,98 @@ describe('feedback independent of newsletter consent (FR-035/036)', () => {
     expect(nl.n).toBe(0);
   });
 });
+
+describe('report integrity (FR-020/021, REPORT-003)', () => {
+  it('renders all 12 sections with provenance labels and explicit stop/defer', async () => {
+    const { token, reportToken } = await createSession();
+    await completeInterview(token, 'report12');
+    await api('POST', `/api/session/${token}/reflection`);
+    await api('POST', `/api/session/${token}/reflection/confirm`, {
+      corrections: '',
+      confirmation: 'confirm',
+      idempotencyKey: `r12-confirm-${Date.now()}`,
+    });
+    // generate report through preview (no email path)
+    await api('GET', `/api/session/${token}/preview`);
+    const rep = await api('GET', `/api/report/${reportToken}`);
+    expect(rep.status).toBe(200);
+    const report = (rep.json as { report: Record<string, unknown> }).report;
+    const required = [
+      'strategyThesis',
+      'decisionBrief',
+      'evidenceBase',
+      'challengeDiagnosis',
+      'crux',
+      'strategicAlternatives',
+      'choiceContract',
+      'assumptionRegister',
+      'evidenceGates',
+      'actionPortfolio',
+      'stopDefer',
+      'executionMeasures',
+      'riskReviews',
+      'decisionRecord',
+    ];
+    for (const k of required) expect(report[k], `missing ${k}`).toBeDefined();
+    const stopDefer = report.stopDefer as Array<{ label: string }>;
+    expect(stopDefer.length).toBeGreaterThanOrEqual(1);
+    // provenance labels only from allowed set
+    const labels = new Set(['user_fact', 'user_assumption', 'ai_inference', 'needs_validation', 'human_decision']);
+    const allLabels = JSON.stringify(report).match(/"label":"([^"]+)"/g) ?? [];
+    for (const m of allLabels) {
+      const val = m.split(':')[1]?.replace(/"/g, '');
+      if (val) expect(labels.has(val), `bad label ${val}`).toBe(true);
+    }
+  });
+});
+
+describe('expired-token neutrality (FR-039, FUNC-022)', () => {
+  it('returns the same neutral body for expired and unknown tokens', async () => {
+    const unknown = await api('GET', '/api/session/definitely-not-a-real-token-000');
+    expect(unknown.status).toBe(404);
+    expect(JSON.stringify(unknown.json)).toContain('link is not available');
+    // create then expire a real session
+    const { token } = await createSession();
+    const sid = (repo.db
+      .prepare('SELECT id FROM sessions WHERE public_token_hash = ?')
+      .get(sha256Hex(token)) as { id: string }).id;
+    repo.updateSession(sid, { expires_at: new Date(Date.now() - 1000).toISOString() });
+    const expired = await api('GET', `/api/session/${token}`);
+    expect(expired.status).toBe(404);
+    expect(JSON.stringify(expired.json)).toBe(JSON.stringify(unknown.json));
+  });
+});
+
+describe('edit invalidates downstream artifacts (FR-008/009)', () => {
+  it('editing an earlier answer rewinds and supersedes reports', async () => {
+    const { token } = await createSession();
+    await completeInterview(token, 'editf');
+    await api('POST', `/api/session/${token}/reflection`);
+    await api('POST', `/api/session/${token}/reflection/confirm`, {
+      corrections: '',
+      confirmation: 'confirm',
+      idempotencyKey: `ef-confirm-${Date.now()}`,
+    });
+    await api('GET', `/api/session/${token}/preview`);
+    const sid = (repo.db
+      .prepare('SELECT id FROM sessions WHERE public_token_hash = ?')
+      .get(sha256Hex(token)) as { id: string }).id;
+    const before = repo.getReportBySession(sid);
+    expect(before.length).toBe(1);
+    // edit Q3 response
+    const q3 = repo.db
+      .prepare("SELECT id FROM responses WHERE session_id = ? AND stage_id = 'Q3' AND is_active = 1")
+      .get(sid) as { id: string };
+    const edit = await api('POST', `/api/session/${token}/answer/${q3.id}/edit`, {
+      answer: 'Edited outcome: by Q4 2027, 90 percent of prioritized journeys run on consented cross-property identity with named business owners.',
+    });
+    expect(edit.status).toBe(200);
+    const after = repo.getReportBySession(sid);
+    expect(after.every((r) => r.superseded_at !== null)).toBe(true);
+    const sess = (await api('GET', `/api/session/${token}`)).json as {
+      session: { coreStage: number; currentStageId: string; status: string };
+    };
+    expect(sess.session.currentStageId).toBe('Q3');
+    expect(sess.session.coreStage).toBe(2);
+  });
+});

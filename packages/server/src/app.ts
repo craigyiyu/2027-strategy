@@ -266,8 +266,18 @@ export function createApp(deps: AppDeps) {
   app.get('/api/session/:token/preview', async (c) => {
     const s = fromSession(c);
     if (!s.usable) return s.res;
+    const existed = !!repo.getActiveReport(s.row.id);
     try {
       const preview = await orch.generatePreview(s.row);
+      if (!existed) {
+        analytics.track('report_generated', {
+          language: s.row.language,
+          lens: s.row.lens,
+          elapsedBucket: 'unknown',
+          modelRoute: 'unknown',
+        });
+      }
+      analytics.track('preview_viewed', { readinessCounts: preview.readinessSnapshot.length });
       return c.json({ ok: true, preview });
     } catch (err) {
       return handleError(c, err);
@@ -371,7 +381,6 @@ export function createApp(deps: AppDeps) {
     if (!s.usable) return s.res;
     const active = repo.getActiveReport(s.row.id);
     if (!active) return c.json({ ok: false, message: 'No report yet.' }, 404);
-    analytics.track('report_generated', { language: s.row.language, lens: s.row.lens, elapsedBucket: 'unknown', modelRoute: 'unknown' });
     return c.json({ ok: true, report: JSON.parse(active.report_json) });
   });
 
