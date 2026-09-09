@@ -17,7 +17,7 @@ manual rubric/visual/bilingual items before public launch.
 |---|---|---|
 | Automated build | PASS | typecheck 0 errors; web production build OK |
 | Product behavior | PASS | 38 server unit/integration + 5 critical E2E (landing, anonymous happy path → 12-section report, admin auth + funnel, EN/ZH smoke, saved-report path) |
-| AI quality | CONDITIONAL | live DeepSeek A–C produce full reports; rubric human scoring pending (test-evidence/ai-evaluations) |
+| AI quality | CONDITIONAL — threshold not yet met | live DeepSeek A/C full reports; judge triage (deepseek-chat, temp 0) mean A 2.56 / C 1.78, 0 fabrications, ≤1 priority, Stop/Defer present; B borderline-refused once (substantive<5); D/E correctly refuse. Human rubric review pending — AI-001..007/009/013..016/018..020 remain Not Run. Full report bodies archived under test-evidence/ai-evaluations/full-reports/ |
 | Trust and safety | PASS | sensitive blocking, consent independence, deletion + neutrality, cross-session, audited reveal, injection, token hash, encryption-at-rest tests green |
 | Product owner acceptance | NOT COMPLETE | manual review runbook provided in test-evidence/manual-qa-runbook.md |
 

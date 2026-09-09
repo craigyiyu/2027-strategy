@@ -1,0 +1,94 @@
+{
+  "judgeModel": "deepseek-chat",
+  "runs": [
+    {
+      "persona": "A",
+      "provider": "live",
+      "judge": {
+        "scores": {
+          "Diagnosis specificity": 2,
+          "Crux quality": 3,
+          "Alternative quality": 2,
+          "Choice clarity": 3,
+          "Evidence traceability": 2,
+          "Assumption quality": 2,
+          "Action coherence": 3,
+          "Execution testability": 3,
+          "Governance integrity": 3
+        },
+        "justifications": {
+          "Diagnosis specificity": "Symptoms are generic (fragmented journeys, delayed reporting) and the confirmed diagnosis is an assumption labeled 'leading explanation' without validation. No root-cause analysis or specific evidence.",
+          "Crux quality": "Crux statement is clear and focused on the core tension, but it is an AI inference needing validation. Why-now is thin, and alternatives are only listed without analysis.",
+          "Alternative quality": "Three options are named but lack guiding policies (all say 'Needs validation'), no trade-offs, and no comparative analysis. They are placeholders rather than developed alternatives.",
+          "Choice clarity": "The decision is explicit and includes what to defer, but it is labeled 'human_decision' yet also 'Needs validation', creating ambiguity. The choice contract is present but not fully fleshed out.",
+          "Evidence traceability": "Most statements are labeled 'ai_inference' with 'Needs validation', and no sources or citations are provided. The report acknowledges missing data but does not trace evidence to verifiable origins.",
+          "Assumption quality": "Assumption register entries are all 'Needs validation' with no content, and key assumptions (e.g., 90-day value) are unvalidated. No sensitivity analysis or prioritization of assumptions.",
+          "Action coherence": "Actions align with the decision and include owners and milestones, but milestones are AI-inferred and not validated. The sequence is logical but lacks dependencies and resource planning.",
+          "Execution testability": "The evidence gate is specific (80% coverage by 31 Dec) with a clear decision rule, but measures are AI-inferred and lack baselines. Some actions have vague milestones (e.g., 'by end of November').",
+          "Governance integrity": "Risk reviews are placeholders ('Needs validation') but require human approval, which is good. However, the decision record shows pending owner decisions and the report lacks a clear escalation path for hard risks."
+        },
+        "fabricated_claims": 0,
+        "traceable_statements": 0,
+        "material_statements_sampled": 10,
+        "missing_unknowns_handled": true,
+        "max_priorities": 1,
+        "has_stop_defer": true,
+        "hard_risks_require_human": true,
+        "notes": "The report is a template with many placeholders and unvalidated inferences. It lacks concrete evidence and detailed analysis, but it does identify key unknowns and includes stop/defer decisions. Scores reflect the need for substantial validation and development."
+      },
+      "reportedLimitations": [
+        "Market data, financials, citations, regulations, and benchmarks are not provided and require validation.",
+        "Specific resilience targets for critical operations are not defined.",
+        "Which guest journeys are prioritized is not specified.",
+        "Security review capacity is unknown.",
+        "The assumption that two use cases demonstrate value in 90 days is unvalidated."
+      ],
+      "maxPriorities": 4,
+      "hasStopDefer": true
+    },
+    {
+      "persona": "C",
+      "provider": "live",
+      "judge": {
+        "scores": {
+          "Diagnosis specificity": 2,
+          "Crux quality": 2,
+          "Alternative quality": 2,
+          "Choice clarity": 2,
+          "Evidence traceability": 1,
+          "Assumption quality": 1,
+          "Action coherence": 2,
+          "Execution testability": 2,
+          "Governance integrity": 2
+        },
+        "justifications": {
+          "Diagnosis specificity": "Symptoms are vague (e.g., 'founder time is bottleneck') and lack quantitative detail. Candidate diagnoses are generic and not validated.",
+          "Crux quality": "Crux is a binary question but lacks depth and evidence. Why now is weak, only citing deadline and bottleneck.",
+          "Alternative quality": "Alternatives are described at a high level with no trade-offs or evaluation criteria. No analysis of feasibility or risks.",
+          "Choice clarity": "Decision is clear but no recommendation or criteria for choosing among alternatives. Pending owner decision is acknowledged.",
+          "Evidence traceability": "All statements are labeled 'ai_inference' with 'Needs validation', and no source IDs are provided. No traceable evidence.",
+          "Assumption quality": "Assumptions are all 'Needs validation' and lack specificity. No evidence state or importance differentiation.",
+          "Action coherence": "Actions are generic and not tied to a specific alternative. No sequencing or dependencies.",
+          "Execution testability": "Measures are vague (e.g., 'two leaders own') and lack baselines or targets. Data sources are not detailed.",
+          "Governance integrity": "Risks are all 'Needs validation' and require human approval, but no specific risks are identified. Stop/defer is present but minimal."
+        },
+        "fabricated_claims": 0,
+        "traceable_statements": 0,
+        "material_statements_sampled": 10,
+        "missing_unknowns_handled": false,
+        "max_priorities": 1,
+        "has_stop_defer": true,
+        "hard_risks_require_human": true,
+        "notes": "Report is largely placeholder with 'Needs validation' labels, lacking substantive content. Scores reflect inadequate specificity and evidence."
+      },
+      "reportedLimitations": [
+        "Market data and financials not validated.",
+        "Client acceptance unknown.",
+        "Internal candidate capability unvalidated.",
+        "No external market benchmarks used."
+      ],
+      "maxPriorities": 6,
+      "hasStopDefer": true
+    }
+  ]
+}

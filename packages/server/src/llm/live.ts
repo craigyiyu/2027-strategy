@@ -55,7 +55,7 @@ export class LiveProvider {
       body: JSON.stringify({
         model,
         messages,
-        temperature: 0.2,
+        temperature: 0.0, // deterministic for assess/report stability
         response_format: { type: 'json_object' },
         max_tokens: 4000,
       }),
