@@ -55,7 +55,7 @@ async function completeInterviewViaApi(page: Page, token: string): Promise<void>
 test('landing page loads with CTA above the fold, no email field (FUNC-001/PRIV-001/VIS-001)', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await expect(page.getByRole('link', { name: /start my 2027 strategy sprint|开始我的 2027 strategy sprint/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /start my 2027 strategy sprint|开始我的 2027 strategy sprint/i }).first()).toBeVisible();
   // no email input on landing
   await expect(page.getByPlaceholder(/you@example.com/)).toHaveCount(0);
 });
@@ -63,12 +63,12 @@ test('landing page loads with CTA above the fold, no email field (FUNC-001/PRIV-
 test('anonymous happy path through preview and on-screen report (FUNC-001..005,013..016, FR-020..022)', async ({ page }) => {
   // go through the real UI
   await page.goto('/');
-  await page.getByRole('link', { name: /start my 2027 strategy sprint|开始我的 2027 strategy sprint/i }).click();
+  await page.getByRole('link', { name: /start my 2027 strategy sprint|开始我的 2027 strategy sprint/i }).first().click();
   // start form defaults EN; select lens then begin
-  await page.getByRole('button', { name: /^Technology & Digital$/ }).click();
-  await page.getByRole('button', { name: /^C-suite$/ }).click();
-  await page.getByRole('button', { name: /Integrated Resort \/ Hospitality/ }).click();
-  await page.getByRole('button', { name: /^Save My Brief$/ }).click();
+  await page.getByRole('radio', { name: /Technology & Digital/ }).check();
+  await page.getByLabel(/Role band/i).selectOption({ label: /C-suite/.source.length ? 'C-suite' : 'C-suite' });
+  await page.getByLabel(/Broad industry/i).selectOption({ label: 'Integrated Resort / Hospitality' });
+  await page.getByRole('radio', { name: /Save My Brief/ }).check();
   await page.getByRole('button', { name: /begin the interview|开始访谈/i }).click();
 
   // interview: answer 8 questions (one per screen)
@@ -86,18 +86,26 @@ test('anonymous happy path through preview and on-screen report (FUNC-001..005,0
     await page.waitForTimeout(250);
   }
 
-  // reflection: confirm
-  await expect(page.getByRole('button', { name: /confirm and generate preview|确认并生成预览/i })).toBeVisible({ timeout: 30_000 });
-  await page.getByRole('button', { name: /confirm and generate preview|确认并生成预览/i }).click();
+  // interview completion card -> review
+  await page.getByRole('button', { name: /view my reflection|查看我的复盘/i }).first().click({ timeout: 15_000 }).catch(async () => {});
+  // reflection: confirm (opens dialog, then confirm inside it)
+  await expect(page.getByRole('button', { name: /confirm and generate preview|确认并生成预览/i }).first()).toBeVisible({ timeout: 30_000 });
+  await page.getByRole('button', { name: /confirm and generate preview|确认并生成预览/i }).first().click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible({ timeout: 10_000 });
+  await dialog.getByRole('button', { name: /confirm|确认/i }).click();
+
+  // after confirm the reflection page shows a continue-to-preview link
+  await page.getByRole('link', { name: /continue to preview|继续查看预览/i }).click({ timeout: 15_000 });
 
   // preview: no email required before content; view report on screen
-  await expect(page.getByRole('button', { name: /view full report on screen|在屏幕上查看完整报告/i })).toBeVisible({ timeout: 30_000 });
-  await page.getByRole('button', { name: /view full report on screen|在屏幕上查看完整报告/i }).click();
+  await expect(page.getByRole('link', { name: /view full report on screen|在屏幕上查看完整报告/i })).toBeVisible({ timeout: 30_000 });
+  await page.getByRole('link', { name: /view full report on screen|在屏幕上查看完整报告/i }).click();
 
-  // report rendered with 12 sections
-  await expect(page.getByText(/Decision Brief|决策简报/)).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByText(/Evidence Gates|证据门/)).toBeVisible();
-  await expect(page.getByText(/Decision Record|决策记录/)).toBeVisible();
+  // report rendered with 12 sections (heading-level anchors)
+  await expect(page.getByRole('heading', { name: /Decision Brief|决策简报/ })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole('heading', { name: /Evidence Gates|证据门/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Decision Record|决策记录/ })).toBeVisible();
   // provenance label chips exist
   await expect(page.getByText(/User fact|用户事实/).first()).toBeVisible();
   // no total numeric score
@@ -145,7 +153,7 @@ test.describe('saved-report path via API + report page (PRIV-003, EMAIL-003 on-s
     expect(deliv.status()).toBe(200);
     // open the report page with the report token
     await page.goto(`/report/${reportToken}`);
-    await expect(page.getByText(/Decision Brief|决策简报/)).toBeVisible({ timeout: 20_000 });
-    await expect(page.getByText(/2027 Strategy Brief/)).toBeVisible();
+    await expect(page.getByRole('heading', { name: /1\. Decision Brief|1\. 决策简报/ })).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByRole('heading', { name: /2027 Strategy Brief/ }).first()).toBeVisible();
   });
 });

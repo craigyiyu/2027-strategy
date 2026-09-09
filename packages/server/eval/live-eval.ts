@@ -84,7 +84,7 @@ async function run() {
     runs.push({ persona: p.id, name: p.name, log, reflectionKeys: reflection ? Object.keys(reflection) : [], reportKeys: report ? Object.keys(report) : [], thesis: report?.strategyThesis, limitations: report?.limitations });
     console.log(`[${p.id}] done${report ? ' — thesis: ' + report.strategyThesis.slice(0, 160) : ''}`);
   }
-  const dir = 'test-evidence/ai-evaluations';
+  const dir = '../../test-evidence/ai-evaluations';
   mkdirSync(dir, { recursive: true });
   const file = `${dir}/personas-${llm.meta.provider}-${new Date().toISOString().slice(0, 10)}.json`;
   writeFileSync(file, JSON.stringify(out, null, 2));

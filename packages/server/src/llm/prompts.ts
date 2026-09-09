@@ -76,14 +76,15 @@ export function buildReflectPrompt(ctx: ReflectContext): { system: string; user:
     answers: ctx.answers,
     prior_extracted: ctx.priorExtracted,
     output_shape: {
-      decision: zh ? '用户要做的决定（一句话）。' : 'the decision the user must make (one line)',
-      facts: zh ? '用户提供的、可核对的事实。' : 'verifiable facts the user supplied',
-      assumptions: zh ? '用户自己的假设或判断。' : 'the user’s own assumptions or judgments',
-      candidate_diagnoses: zh ? '2–4 个可被推翻的候选诊断，各带 support 与 counter_evidence。' : '2–4 falsifiable candidate diagnoses each with support and counter_evidence',
-      proposed_crux: zh ? '最重要且当下可处理的关键障碍。' : 'the most important, currently actionable obstacle',
-      conflicts: zh ? '回答间的矛盾与张力。' : 'contradictions and tensions across answers',
-      missing_evidence: zh ? '还缺哪些证据或未知项。' : 'evidence still missing or unknown',
+      decision: zh ? '字符串，一句话。' : 'string, one line',
+      facts: zh ? '字符串数组（每个元素一条可核对事实）。没有则给空数组 []。绝不要用单个字符串。' : 'array of strings, one item per verifiable fact; use [] when none. NEVER a single string.',
+      assumptions: zh ? '字符串数组（每个元素一条用户判断）。' : 'array of strings, one per user judgment',
+      candidate_diagnoses: zh ? '数组，每项含 diagnosis(string)、support(string 数组)、counter_evidence(string 数组)。' : 'array of {diagnosis:string, support:string[], counter_evidence:string[]}',
+      proposed_crux: zh ? '字符串，一句话。' : 'string, one line',
+      conflicts: zh ? '字符串数组。' : 'array of strings',
+      missing_evidence: zh ? '字符串数组。' : 'array of strings',
     },
+    hard_type_rule: 'facts, assumptions, conflicts, missing_evidence 必须是数组；candidate_diagnoses[].support 与 .counter_evidence 也必须是数组。违者将被拒绝。',
   });
   return { system, user };
 }

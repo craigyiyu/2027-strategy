@@ -1,0 +1,491 @@
+{
+  "provider": "live",
+  "modelId": "deepseek-chat",
+  "runs": [
+    {
+      "persona": "A",
+      "name": "Persona A — Integrated Resort CTO",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "vague",
+          "followup": "Which specific guest journeys and which critical operations are you targeting, and what measurable thresholds would indicate success?",
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "action": "followup-answer",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "vague",
+          "followup": "What specific evidence would confirm one explanation over the other?",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "action": "followup-answer",
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "vague",
+          "followup": "Which specific security review capacity is required, and what is the estimated timeline for obtaining it?",
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "action": "followup-answer",
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "Establish a shared customer-data foundation by end-2027, enabling two consented journey pilots by 31 Dec 2026 as a go/no-go checkpoint, while deferring property-by-property app rebuilds and a second major platform initiative in H1.",
+      "limitations": [
+        "Market data, financials, citations, regulations, and benchmarks are not provided and must be validated. [ai_inference]",
+        "AI suggestions are not approved decisions; human review required for high-impact areas. [ai_inference]",
+        "This report is independent and not affiliated with any external strategy publication. [ai_inference]"
+      ]
+    },
+    {
+      "persona": "B",
+      "name": "Persona B — Technology Services Director",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "vague",
+          "followup": "What specific numeric targets for service margin and share of repeat bookings would you consider as meaningful progress by Q4 2027?",
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "action": "followup-answer",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "vague",
+          "followup": "What specific data or observation would confirm that custom scope and weak asset capture, rather than sales incentives, is the primary mechanism preventing the result?",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "action": "followup-answer",
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "vague",
+          "followup": "For Option B, what specific segment and service boundary do you envision, and what capabilities or market share are you willing to sacrifice to pursue it?",
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "action": "followup-answer",
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "Productize one AI service segment with a fixed boundary to convert bespoke delivery into repeatable, higher-margin engagements, validated by three paid design partners within 90 days.",
+      "limitations": [
+        "No market data, financials, or benchmarks were provided; all such claims are marked needs_validation.",
+        "Specific target values for service margin and share of repeat bookings are missing.",
+        "Baseline values for service margin and share of repeat bookings are missing.",
+        "The assumption that three paid design partners will accept a fixed boundary is unvalidated.",
+        "The alternative diagnosis of sales incentives is not reconciled with the leading explanation.",
+        "No data on asset reuse rates or margin impact by scope type.",
+        "No analysis of sales incentive structures and their effect on deal composition.",
+        "Specific criteria for continue, pause, or stop beyond 'adjust if fewer than two sign' are not provided."
+      ]
+    },
+    {
+      "persona": "C",
+      "name": "Persona C — EMBA Executive",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "vague",
+          "followup": "For Option A (external hire), what specific market or capability gap does this fill, and what would you explicitly deprioritize or stop doing to fund and integrate that hire?",
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "action": "followup-answer",
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "vague",
+          "followup": "What specific capabilities and economic thresholds (e.g., revenue impact, cost ceiling, timeline) must the senior hire meet for the option to be considered successful?",
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "action": "followup-answer",
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "In 2027, build a second leadership layer to reduce founder dependency and unlock client expansion, deciding by end of January between external hire, internal promotion, or scope reduction. Success by Q4 2027: two leaders own delivery and client expansion, evidenced by decision logs and freed founder hours.",
+      "limitations": [
+        "Market data, financials, citations, regulations, and benchmarks are not provided and require validation. (needs_validation)",
+        "Client acceptance and internal candidate readiness are unvalidated assumptions. (user_assumption)",
+        "No external market benchmarks for leadership hiring or scope reduction are included. (needs_validation)"
+      ]
+    },
+    {
+      "persona": "D",
+      "name": "Persona D — Vague Planner (adversarial)",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "vague",
+          "followup": "Which specific decision do you need to make, and by when?",
+          "next": "Q1"
+        },
+        {
+          "stage": "Q1",
+          "action": "followup-answer",
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "vague",
+          "followup": "What specific market change or customer expectation have you observed that makes this decision urgent now?",
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "action": "followup-answer",
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "vague",
+          "followup": "What specific, observable change in customer experience would you attribute to AI by the end of 2027 — for example, a target reduction in response time, an increase in satisfaction scores, or a new capability customers can use?",
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "action": "followup-answer",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "vague",
+          "followup": "What specific process or factor do you believe is causing the poor customer experience, and what alternative explanation could also account for it?",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "action": "followup-answer",
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "too_many_priorities",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "vague",
+          "followup": null,
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "vague",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "vague",
+          "followup": null,
+          "next": null
+        },
+        {
+          "finalError": "Reflection needs ≥5 substantive core answers (1 provided)."
+        }
+      ],
+      "reflectionKeys": [],
+      "reportKeys": []
+    },
+    {
+      "persona": "E",
+      "name": "Persona E — Contradictory Planner (adversarial)",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "vague",
+          "followup": "What is the specific deadline for this decision, and what criteria will you use to select the five programs?",
+          "next": "Q1"
+        },
+        {
+          "stage": "Q1",
+          "action": "followup-answer",
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "vague",
+          "followup": "What specific event or change made this decision urgent now, given that budget and headcount are fixed?",
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "action": "followup-answer",
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "vague",
+          "followup": "Which of the five programs is most at risk of missing that deadline, and what early-warning metric would signal trouble?",
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "action": "followup-answer",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "vague",
+          "followup": "What specific evidence or data would confirm that capacity is the true constraint, and what alternative mechanisms could also explain the current results?",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "action": "followup-answer",
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "too_many_priorities",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "vague",
+          "followup": null,
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "vague",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "vague",
+          "followup": null,
+          "next": null
+        },
+        {
+          "finalError": "Reflection needs ≥5 substantive core answers (1 provided)."
+        }
+      ],
+      "reflectionKeys": [],
+      "reportKeys": []
+    }
+  ]
+}
