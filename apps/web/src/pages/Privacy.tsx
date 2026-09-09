@@ -3,7 +3,6 @@ import { POLICY_VERSION } from '@2027strategy/shared';
 import { useUiLanguage } from '../useQueryLang';
 import { Footer } from '../components/Footer';
 import { TopBar } from '../components/TopBar';
-import { PrintHeader } from '../components/PrintHeader';
 import { FocusableH1, PageShell } from '../components/ui';
 
 const SECTION_KEYS = [
@@ -24,7 +23,6 @@ export default function Privacy() {
 
   return (
     <PageShell topBar={<TopBar lang={lang} langSwitch />} footer={<Footer lang={lang} />}>
-      <PrintHeader title={t.privacy.title} />
       <FocusableH1>{t.privacy.title}</FocusableH1>
       <p className="page-subtitle">{t.privacy.intro}</p>
 

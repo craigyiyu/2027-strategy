@@ -15,7 +15,13 @@ export const CONSENT_ORDER: Array<{ key: keyof ConsentState; purpose: ConsentPur
   { key: 'followup', purpose: 'followup' },
 ];
 
-function labelKey(key: keyof ConsentState): string {
+type DeliveryConsentKey =
+  | 'consentDeliveryLabel'
+  | 'consentNewsletter'
+  | 'consentPulse'
+  | 'consentFollowup';
+
+function labelKey(key: keyof ConsentState): DeliveryConsentKey {
   switch (key) {
     case 'reportDelivery':
       return 'consentDeliveryLabel';

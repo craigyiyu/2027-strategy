@@ -10,7 +10,6 @@ import {
 import { useUiLanguage } from '../useQueryLang';
 import { Footer } from '../components/Footer';
 import { TopBar } from '../components/TopBar';
-import { PrintHeader } from '../components/PrintHeader';
 import { FocusableH1, PageShell } from '../components/ui';
 
 export default function Method() {
@@ -21,7 +20,6 @@ export default function Method() {
 
   return (
     <PageShell topBar={<TopBar lang={lang} langSwitch />} footer={<Footer lang={lang} />}>
-      <PrintHeader title={t.method.title} />
       <FocusableH1>{t.method.title}</FocusableH1>
       <p className="page-subtitle">{subtitle}</p>
 

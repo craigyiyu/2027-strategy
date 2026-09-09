@@ -11,7 +11,7 @@ export interface ReadinessItem {
   explanation: string;
 }
 
-const LEVEL_KEY: Record<ReadinessLevel, string> = {
+const LEVEL_KEY: Record<ReadinessLevel, 'levelGreen' | 'levelAmber' | 'levelRed'> = {
   green: 'levelGreen',
   amber: 'levelAmber',
   red: 'levelRed',

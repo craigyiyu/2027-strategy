@@ -135,6 +135,16 @@ export default function Interview() {
     return undefined;
   }, [stageId, headingRef]);
 
+  // A fresh follow-up card starts with an empty answer field.
+  useEffect(() => {
+    if (followupPending) {
+      setDraft('');
+      setAck(null);
+      setAutosave('idle');
+      setPageError(null);
+    }
+  }, [followupPending]);
+
   useEffect(() => {
     document.title = t.meta.title;
   }, [t]);
@@ -520,7 +530,7 @@ function messageForError(err: unknown, t: Dict): string {
   if (err instanceof ApiError) {
     if (err.status === 429) return t.errors.rateLimited;
     if (err.code === 'ai_failed' || err.status === 502) return t.errors.aiFailed;
-    if (err.status === 409) return t.errors.stageNotCurrent;
+    if (err.code === 'invalid_stage' || err.status === 409) return t.errors.stageNotCurrent;
     if (err.status === 0) return t.errors.network;
     return t.errors.generic;
   }
@@ -540,31 +550,65 @@ function ResumeCard({
 }) {
   const navigate = useNavigate();
   const status = session.status;
-  const isConfirmed =
-    status === 'preview_ready' || status === 'report_ready' || status === 'completed' || status === 'delivery_choice';
 
-  const title = status === 'reflection_ready' ? t.interview.completeTitle : t.interview.resumeTitle;
-  const body =
-    status === 'reflection_ready' ? t.interview.completeBody : t.interview.previewReadyBody;
-  const cta = isConfirmed ? t.interview.continuePreview : t.interview.resumeReview;
-  const path = isConfirmed
-    ? `/session/${encodeURIComponent(token)}/preview`
-    : `/session/${encodeURIComponent(token)}/review`;
+  if (status === 'reflection_ready') {
+    return (
+      <div className="app-shell">
+        <TopBar lang={lang} />
+        <main className="container session-end">
+          <h1 tabIndex={-1} className="page-title">
+            {t.interview.completeTitle}
+          </h1>
+          <p className="page-subtitle">{t.interview.completeBody}</p>
+          <p className="post-edit-note">{t.interview.postCompleteEditNote}</p>
+          <div className="session-end-actions">
+            <Button variant="primary" onClick={() => navigate(`/session/${encodeURIComponent(token)}/review`)}>
+              {t.interview.resumeReview}
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
+  if (
+    status === 'preview_ready' ||
+    status === 'reflection_confirmed' ||
+    status === 'delivery_choice' ||
+    status === 'report_ready' ||
+    status === 'completed'
+  ) {
+    return (
+      <div className="app-shell">
+        <TopBar lang={lang} />
+        <main className="container session-end">
+          <h1 tabIndex={-1} className="page-title">
+            {t.interview.resumeTitle}
+          </h1>
+          <p className="page-subtitle">{t.interview.previewReadyBody}</p>
+          <p className="post-edit-note">{t.interview.postCompleteEditNote}</p>
+          <div className="session-end-actions">
+            <Button variant="primary" onClick={() => navigate(`/session/${encodeURIComponent(token)}/preview`)}>
+              {t.interview.continuePreview}
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // any other terminal state (e.g. sensitive_input_blocked): neutral exit
   return (
     <div className="app-shell">
       <TopBar lang={lang} />
       <main className="container session-end">
         <h1 tabIndex={-1} className="page-title">
-          {title}
+          {t.errors.sessionNeutral}
         </h1>
-        <p className="page-subtitle">{body}</p>
-        {status === 'reflection_ready' ? (
-          <p className="post-edit-note">{t.interview.postCompleteEditNote}</p>
-        ) : null}
+        <p className="page-subtitle">{t.errors.generic}</p>
         <div className="session-end-actions">
-          <Button variant="primary" onClick={() => navigate(path)}>
-            {cta}
+          <Button variant="primary" onClick={() => navigate('/')}>
+            {t.common.productName}
           </Button>
         </div>
       </main>

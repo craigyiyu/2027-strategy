@@ -13,7 +13,13 @@ import { fmt } from '../format';
 import { Modal } from './Modal';
 import { Button } from './ui';
 
-function categoryCopyKey(category: SensitivityCategory): string | null {
+type SensitiveCopyKey =
+  | 'sensitiveCategoryCredential'
+  | 'sensitiveCategoryPersonalData'
+  | 'sensitiveCategorySecurityDetail'
+  | 'sensitiveCategoryConfidentialFinancial';
+
+function categoryCopyKey(category: SensitivityCategory): SensitiveCopyKey | null {
   switch (category) {
     case 'credential':
       return 'sensitiveCategoryCredential';

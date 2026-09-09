@@ -1,7 +1,7 @@
 /**
- * Evidence provenance chip — renders label + dot from the shared
- * REPORT_LABELS_*/PROVENANCE_LABELS_* dictionaries. Text is always present so
- * meaning never relies on color alone.
+ * Evidence provenance chip — renders label + dot from the shared provenance
+ * label dictionaries. Text is always present so meaning never relies on
+ * color alone.
  */
 import {
   PROVENANCE_LABELS_EN,

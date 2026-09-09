@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-jsx",
-    "types": ["vite/client"],
     "paths": {
       "@2027strategy/shared": ["../../packages/shared/src/index.ts"]
     }

@@ -209,7 +209,7 @@ export default function Report() {
         <p className="page-subtitle">{t.interview.completeBody}</p>
         <div className="session-end-actions">
           <Link to={`/session/${encodeURIComponent(token)}`} className="btn btn-primary">
-            {t.interview.continue}
+            {t.common.continue}
           </Link>
         </div>
       </PageShell>

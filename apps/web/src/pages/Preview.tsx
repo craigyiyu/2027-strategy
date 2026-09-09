@@ -3,7 +3,7 @@
  * unresolved tension + readiness snapshot; then choose on-screen full report
  * (anonymous) or email delivery with 4 separate consent choices.
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { PreviewResponse } from '@2027strategy/shared';
 import { useSession, useSessionLang } from '../session';
@@ -11,11 +11,9 @@ import {
   ApiError,
   getPreview,
   newIdempotencyKey,
-  reportTokenForSession,
   submitDelivery,
 } from '../api';
-import { fmt } from '../format';
-import { Button, FocusableH1, PageShell, TextArea, TextInput, useFieldId } from '../components/ui';
+import { Button, FocusableH1, PageShell, TextInput, useFieldId } from '../components/ui';
 import { TopBar } from '../components/TopBar';
 import { ErrorNotice } from '../components/ErrorNotice';
 import { ConsentPanel, type ConsentState } from '../components/ConsentPanel';
@@ -47,12 +45,14 @@ export default function Preview() {
   });
   const [deliverError, setDeliverError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const fetchInFlight = useRef(false);
 
   const emailId = useFieldId('delivery-email');
   const firstId = useFieldId('delivery-first');
 
   const fetchPreview = async (): Promise<void> => {
-    if (!token) return;
+    if (!token || fetchInFlight.current) return;
+    fetchInFlight.current = true;
     setPreviewState('loading');
     setPreviewError(null);
     try {
@@ -74,6 +74,8 @@ export default function Preview() {
         setPreviewState('error');
         setPreviewError('generic');
       }
+    } finally {
+      fetchInFlight.current = false;
     }
   };
 
@@ -96,8 +98,9 @@ export default function Preview() {
   }, [session?.status, token]);
 
   const openReportPath = (): string => {
-    const rt = reportTokenForSession(token) ?? token;
-    return `/report/${encodeURIComponent(rt)}`;
+    // The session token also works for /report/:token (report-capability
+    // lookup accepts either token), and it keeps "Edit my inputs" usable.
+    return `/report/${encodeURIComponent(token)}`;
   };
 
   const deliver = async (): Promise<void> => {
@@ -118,7 +121,7 @@ export default function Preview() {
         email: trimmedEmail,
         firstName: firstName.trim() || undefined,
         consents,
-        reportToken: reportTokenForSession(token) ?? token,
+        reportToken: token,
         idempotencyKey: newIdempotencyKey(),
       });
       navigate(openReportPath());
@@ -337,10 +340,6 @@ export default function Preview() {
             </aside>
           </div>
         </div>
-      ) : null}
-
-      {preview && previewState === 'ready' ? (
-        <p className="print-hint no-print">{fmt(t.report.methodAttribution, {})}</p>
       ) : null}
     </PageShell>
   );

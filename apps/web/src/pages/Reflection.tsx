@@ -3,7 +3,7 @@
  * diagnoses with support & counter-evidence, conflicts/missing evidence),
  * proposed crux + decision; corrections before confirm & preview generation.
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CORE_STAGES,
@@ -17,7 +17,7 @@ import {
   generateReflection,
   newIdempotencyKey,
 } from '../api';
-import { Button, FocusableH1, PageShell, useHeadingFocus } from '../components/ui';
+import { Button, FocusableH1, PageShell } from '../components/ui';
 import { TopBar } from '../components/TopBar';
 import { ErrorNotice } from '../components/ErrorNotice';
 import { ConfirmDialog } from '../components/Modal';
@@ -28,7 +28,6 @@ type GenState = 'idle' | 'loading' | 'ready' | 'failed';
 export default function Reflection() {
   const { session, token, load, error, reload } = useSession();
   const { lang } = useSessionLang();
-  const headingRef = useHeadingFocus();
 
   const [reflection, setReflection] = useState<ReflectionOutput | null>(null);
   const [gen, setGen] = useState<GenState>('idle');
@@ -40,9 +39,11 @@ export default function Reflection() {
   const [confirmError, setConfirmError] = useState<string | null>(null);
 
   const t = useSessionLang().t;
+  const genInFlight = useRef(false);
 
   const generate = async (): Promise<void> => {
-    if (!token) return;
+    if (!token || genInFlight.current) return;
+    genInFlight.current = true;
     setGen('loading');
     setGenError(null);
     setInsufficient(null);
@@ -67,12 +68,14 @@ export default function Reflection() {
         setGenError(err instanceof ApiError && err.status === 0 ? t.errors.network : t.errors.generic);
         setGen('failed');
       }
+    } finally {
+      genInFlight.current = false;
     }
   };
 
   useEffect(() => {
     document.title = t.meta.title;
-    if (session && (session.status === 'reflection_ready' || session.status === 'reflection_confirmed')) {
+    if (session && session.status === 'reflection_ready') {
       void generate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -139,6 +142,7 @@ export default function Reflection() {
   // ---- already confirmed: go to the preview ----
   if (
     session.status === 'preview_ready' ||
+    session.status === 'reflection_confirmed' ||
     session.status === 'report_ready' ||
     session.status === 'delivery_choice' ||
     session.status === 'completed'
@@ -328,6 +332,3 @@ function messageForConfirmError(err: unknown, t: ReturnType<typeof useSessionLan
   }
   return t.errors.network;
 }
-
-void IconCheck;
-void headingRef;
