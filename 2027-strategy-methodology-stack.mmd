@@ -1,0 +1,49 @@
+flowchart TB
+    A[用户材料与回答<br/>事实 / 假设 / 约束 / 偏好]
+
+    subgraph CORE[主干：Rumelt 战略问题解决]
+      B[诊断 Diagnosis] --> C[关键障碍 Crux<br/>最重要且可处理]
+      C --> D[指导方针<br/>Guiding Policy]
+      D --> E[协调行动<br/>Coherent Actions]
+    end
+
+    subgraph CHOICE[辅助一：Lafley–Martin 选择规格化]
+      F[取胜抱负] --> G[在哪里参与<br/>Where to Play]
+      G --> H[如何取胜<br/>How to Win]
+      H --> I[关键能力 + 管理系统]
+    end
+
+    subgraph EVIDENCE[辅助二：McGrath–MacMillan 证据与阶段承诺]
+      J[反向经济性] --> K[关键假设登记]
+      K --> L[最小充分测试]
+      L --> M[继续 / 调整 / 暂停 / 退出]
+    end
+
+    subgraph EXECUTION[辅助三：Kaplan–Norton 执行与学习]
+      N[目标关系图] --> O[结果指标 + 驱动指标]
+      O --> P[负责人 / 数据源 / 复盘节奏]
+    end
+
+    Q[人工审批硬门<br/>牌照·AML·隐私·网络安全·资本风险]
+    R[新证据 / 偏差 / 外部变化<br/>进入下一轮诊断]
+
+    A --> B
+    E --> F
+    I --> J
+    M --> N
+    P --> R
+
+    Q -. 不可被综合评分覆盖 .-> C
+    Q -. 人工评审 .-> I
+    Q -. 人工批准 .-> L
+    Q -. 持续监测 .-> P
+
+    style B fill:#183B4E,color:#fff,stroke:#183B4E
+    style C fill:#183B4E,color:#fff,stroke:#183B4E
+    style D fill:#183B4E,color:#fff,stroke:#183B4E
+    style E fill:#183B4E,color:#fff,stroke:#183B4E
+    style F fill:#DDA853,color:#1d1d1d,stroke:#B8872F
+    style J fill:#275D38,color:#fff,stroke:#275D38
+    style N fill:#6B4F8A,color:#fff,stroke:#6B4F8A
+    style Q fill:#8C2F39,color:#fff,stroke:#8C2F39
+    style R fill:#EAE6DF,color:#1d1d1d,stroke:#8C7B68

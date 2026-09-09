@@ -1,0 +1,501 @@
+{
+  "provider": "deterministic",
+  "modelId": "deterministic-local",
+  "runs": [
+    {
+      "persona": "A",
+      "name": "Persona A — Integrated Resort CTO",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "preview",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "By Q4 2027, prioritized guest journeys use trusted cross-property identity and consented data, and critical operations meet agreed resilience targets.",
+      "limitations": [
+        "Generated in no-key deterministic mode.",
+        "Synthesized locally without a live model; treat as direction only and validate before use.",
+        "本地无模型合成，仅供方向参考，使用前请验证。"
+      ]
+    },
+    {
+      "persona": "B",
+      "name": "Persona B — Technology Services Director",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "missing_tradeoff",
+          "followup": "What you listed reads like different tasks. What genuinely different approaches — with different trade-offs — are you weighing?",
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "action": "followup-answer",
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "preview",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "By Q4 2027, recurring revenue is higher and delivery variability is lower, shown by service margin and share of repeat bookings.",
+      "limitations": [
+        "Generated in no-key deterministic mode.",
+        "Synthesized locally without a live model; treat as direction only and validate before use.",
+        "本地无模型合成，仅供方向参考，使用前请验证。"
+      ]
+    },
+    {
+      "persona": "C",
+      "name": "Persona C — EMBA Executive",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "preview",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "By Q4 2027, two leaders own delivery and client expansion without constant founder intervention, shown by decision logs and freed founder hours.",
+      "limitations": [
+        "Generated in no-key deterministic mode.",
+        "Synthesized locally without a live model; treat as direction only and validate before use.",
+        "本地无模型合成，仅供方向参考，使用前请验证。"
+      ]
+    },
+    {
+      "persona": "D",
+      "name": "Persona D — Vague Planner (adversarial)",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "activity_not_outcome",
+          "followup": "What observable result would show real progress by the end of 2027 — not an activity like launching or implementing?",
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "action": "followup-answer",
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "too_many_priorities",
+          "followup": "If resources do not increase, which single obstacle comes first — and what important work will you deliberately not do now?",
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "action": "followup-answer",
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "missing_tradeoff",
+          "followup": "What you listed reads like different tasks. What genuinely different approaches — with different trade-offs — are you weighing?",
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "action": "followup-answer",
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "preview",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "Success is implementing AI and improving customer experience.",
+      "limitations": [
+        "Generated in no-key deterministic mode.",
+        "Synthesized locally without a live model; treat as direction only and validate before use.",
+        "本地无模型合成，仅供方向参考，使用前请验证。"
+      ]
+    },
+    {
+      "persona": "E",
+      "name": "Persona E — Contradictory Planner (adversarial)",
+      "log": [
+        {
+          "stage": "Q1",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q2"
+        },
+        {
+          "stage": "Q2",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q3"
+        },
+        {
+          "stage": "Q3",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q4"
+        },
+        {
+          "stage": "Q4",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q5"
+        },
+        {
+          "stage": "Q5",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q6"
+        },
+        {
+          "stage": "Q6",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q7"
+        },
+        {
+          "stage": "Q7",
+          "quality": "sufficient",
+          "followup": null,
+          "next": "Q8"
+        },
+        {
+          "stage": "Q8",
+          "quality": "sufficient",
+          "followup": null,
+          "next": null
+        }
+      ],
+      "reflectionKeys": [
+        "decision",
+        "facts",
+        "assumptions",
+        "candidate_diagnoses",
+        "proposed_crux",
+        "conflicts",
+        "missing_evidence"
+      ],
+      "reportKeys": [
+        "schemaVersion",
+        "language",
+        "modelId",
+        "promptVersion",
+        "generatedAt",
+        "strategyThesis",
+        "preview",
+        "decisionBrief",
+        "evidenceBase",
+        "challengeDiagnosis",
+        "crux",
+        "strategicAlternatives",
+        "choiceContract",
+        "assumptionRegister",
+        "reverseEconomics",
+        "evidenceGates",
+        "actionPortfolio",
+        "stopDefer",
+        "executionMeasures",
+        "riskReviews",
+        "decisionRecord",
+        "readinessSnapshot",
+        "limitations",
+        "stopDeferExplicit"
+      ],
+      "thesis": "Deliver all five programs on time within the fixed budget.",
+      "limitations": [
+        "Generated in no-key deterministic mode.",
+        "Synthesized locally without a live model; treat as direction only and validate before use.",
+        "本地无模型合成，仅供方向参考，使用前请验证。"
+      ]
+    }
+  ]
+}

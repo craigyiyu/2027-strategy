@@ -1,0 +1,29 @@
+flowchart TB
+    subgraph USER[用户体验]
+      A[Newsletter / 私人邀请] --> B[落地页<br/>承诺 10–15 分钟]
+      B --> C[匿名开始<br/>选择角色与语言]
+      C --> D[8 个核心问题<br/>一次一题]
+      D --> E{答案是否具体?}
+      E -- 否 --> F[最多 1–2 个<br/>针对性追问]
+      F --> D
+      E -- 是 --> G[“这是我听到的”<br/>用户核对与修改]
+      G --> H[即时结果预览<br/>战略主张 + 3 个优先事项]
+      H --> I{用户选择}
+      I --> J[匿名查看 / 下载<br/>不保存]
+      I --> K[输入邮箱<br/>接收完整报告]
+      K --> L[用途分离同意<br/>交付 / Newsletter / 匿名研究]
+      L --> M[完整 2027 Strategy Brief<br/>+ 90 天行动计划]
+      M --> N[低压 CTA<br/>回复 / 分享 / 预约交流]
+    end
+
+    subgraph INSIGHT[洞察与管理]
+      L --> O[仅聚合非敏感答案]
+      O --> P[2027 Executive Priorities Pulse]
+      Q[管理员后台] --> R[查看漏斗与主题分布<br/>不把原始答案送入分析工具]
+      Q --> S[删除 / 导出 / 处理联系请求]
+    end
+
+    style B fill:#183B4E,color:#fff,stroke:#183B4E
+    style H fill:#DDA853,color:#1d1d1d,stroke:#B8872F
+    style M fill:#275D38,color:#fff,stroke:#275D38
+    style P fill:#6B4F8A,color:#fff,stroke:#6B4F8A

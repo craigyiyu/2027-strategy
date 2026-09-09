@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "@2027strategy/shared": ["../shared/src/index.ts"]
+    }
+  },
+  "include": ["src", "test", "eval"]
+}

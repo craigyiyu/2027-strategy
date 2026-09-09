@@ -1,0 +1,35 @@
+{
+  "name": "@2027strategy/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc --noEmit && echo 'server runs from TS via tsx (deployment bundles src)'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "test:e2e": "playwright test",
+    "eval:live": "tsx eval/live-eval.ts"
+  },
+  "dependencies": {
+    "@2027strategy/shared": "workspace:*",
+    "@hono/node-server": "^1.13.3",
+    "better-sqlite3": "^11.5.0",
+    "dotenv": "^16.4.5",
+    "hono": "^4.6.9",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.7.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3"
+  }
+}

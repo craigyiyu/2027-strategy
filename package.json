@@ -1,0 +1,36 @@
+{
+  "name": "2027-strategy",
+  "private": true,
+  "version": "0.1.0",
+  "description": "2027 Strategy — privacy-first, AI-assisted executive planning (MingCe Evidence Loop). Private-beta MVP.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @2027strategy/server --filter @2027strategy/web dev",
+    "dev:server": "pnpm --filter @2027strategy/server dev",
+    "dev:web": "pnpm --filter @2027strategy/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:unit": "pnpm -r test:unit",
+    "test:integration": "pnpm --filter @2027strategy/server test:integration",
+    "test:e2e": "pnpm --filter @2027strategy/server test:e2e",
+    "audit:deps": "pnpm audit --prod",
+    "secret:scan": "gitleaks git --no-banner --redact 2>/dev/null || echo 'gitleaks not installed locally; CI runs it'",
+    "eval:live": "pnpm --filter @2027strategy/server eval:live"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.7.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "esbuild",
+      "@playwright/test"
+    ]
+  }
+}

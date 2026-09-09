@@ -1,0 +1,63 @@
+name: CI — 2027 Strategy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      LLM_MODE: fake
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm -r typecheck
+
+      - name: Build (shared + web)
+        run: pnpm --filter @2027strategy/web build
+
+      - name: Unit + integration tests
+        run: pnpm -r test
+
+      - name: Dependency audit
+        run: pnpm audit --prod || true
+        continue-on-error: true
+
+      - name: Secret scan (gitleaks)
+        run: |
+          if command -v gitleaks >/dev/null 2>&1; then
+            gitleaks git --no-banner --redact --exit-code=0
+          else
+            echo "gitleaks not installed in this image — scan will run via pre-commit or manually"
+          fi
+
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-evidence
+          path: |
+            packages/*/coverage/**/*.json
+            test-evidence/
+          if-no-files-found: ignore

@@ -1,0 +1,40 @@
+# Dependencies / build
+node_modules/
+.pnpm-store/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+
+# Secrets & credentials — never commit
+*.pem
+*.key
+!test-evidence/**/*.key  # (test fixtures if ever generated — keep explicit)
+.env.production
+
+# Local runtime data
+data/
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+test-evidence/**/screenshots/*.png
+test-evidence/**/network-logs-redacted/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Playwright
+playwright-report/
+test-results/
