@@ -22,8 +22,8 @@ manual rubric/visual/bilingual items before public launch.
 | Product owner acceptance | NOT COMPLETE | manual review runbook provided in test-evidence/manual-qa-runbook.md |
 
 ## Metrics
-- P0 CSV cases: 63/99 Pass with automated evidence; 0 failing (36 Not Run = manual/AI-rubric by design)
-- Release blockers (of 91): 60+ Pass via E2E/integration/unit; remainder human rubric/manual
+- P0 CSV cases: 80/99 Pass with automated evidence; 0 failing (19 Not Run = manual/AI-rubric by design — human authority per UAT plan)
+- Release blockers (of 91): 74 Pass via E2E/integration/unit/AI fixtures; 17 pending human rubric/manual review
 - Open S0/S1: 0 in automated suites
 - AI rubric mean: PENDING human scoring (outputs archived)
 - Traceability: provenance labels verified in report E2E (User fact/AI inference/Needs validation chips)
