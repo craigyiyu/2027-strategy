@@ -122,7 +122,7 @@ export class DeterministicProvider {
       get('Q5').split(/(?:deliberately not|stop|defer|暂缓|不做|停止)/i).pop() ||
       g('Explicit Stop / Defer decision required from the user.', '需要用户给出明确的停止/延后决定。');
 
-    return {
+    const out: ReportOutput = {
       schemaVersion: '1.0',
       language: lang,
       modelId: this.meta.modelId,
@@ -295,6 +295,22 @@ export class DeterministicProvider {
       stopDeferExplicit: true,
       preview: undefined,
     };
+    // localize English default notes for zh-CN output (LOC-001)
+    if (lang === 'zh-CN') {
+      const fix = (o: unknown): void => {
+        if (Array.isArray(o)) { o.forEach(fix); return; }
+        if (o && typeof o === 'object') {
+          const rec = o as Record<string, unknown>;
+          if (typeof rec.note === 'string') {
+            if (rec.note === 'Needs validation.') rec.note = '待验证。';
+            else if (rec.note === 'AI inference — needs validation') rec.note = 'AI 推断——待验证。';
+          }
+          for (const k of Object.keys(rec)) fix(rec[k]);
+        }
+      };
+      fix(out);
+    }
+    return out;
   }
 }
 

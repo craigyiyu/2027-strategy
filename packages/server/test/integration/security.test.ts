@@ -216,3 +216,91 @@ describe('domain error mapping', () => {
     expect(res.status).toBe(404);
   });
 });
+
+describe('email failure recovery with failing provider (EMAIL-003, FR-032/040)', () => {
+  it('keeps the report on screen and reports non-delivery when the provider fails', async () => {
+    const db = openDatabase();
+    migrate(db);
+    const repo2 = new Repo(db, new FieldCipher('', 'fail-secret-24-characters-min'));
+    const o2 = new Orchestrator(repo2, new DeterministicProvider());
+    const failingEmail: EmailServiceShim = {
+      providerName: 'failing',
+      async sendReport() { return { ok: false, provider: 'failing', emailId: 'x', status: 'failed' }; },
+      async sendDeletionReceipt() { return { ok: true, provider: 'failing', emailId: 'x', status: 'sent' }; },
+      async sendConsentConfirmation() { return { ok: true, provider: 'failing', emailId: 'x', status: 'sent' }; },
+    };
+    const app2 = createApp({
+      repo: repo2,
+      orchestrator: o2,
+      admin: new AdminService(repo2, 20),
+      analytics: new AnalyticsService(repo2),
+      email: failingEmail as never,
+      env: e,
+    });
+    const mk = await app2.request('http://localhost/api/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ language: 'en', lens: 'business', roleBand: 'owner', industryBand: 'other', privacyMode: 'save' }),
+    });
+    const { token } = (await mk.json()) as { token: string };
+    for (let i = 0; i < 8; i++) {
+      const stage = CORE_STAGES[i]!;
+      await app2.request(`http://localhost/api/session/${token}/answer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ stageId: stage, answer: `Specific answer ${stage} with owner, deadline Q4 and a measurable outcome and numbers.`, idempotencyKey: `ef-${stage}-0000001` }),
+      });
+    }
+    await app2.request(`http://localhost/api/session/${token}/reflection`, { method: 'POST' });
+    await app2.request(`http://localhost/api/session/${token}/reflection/confirm`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ corrections: '', confirmation: 'confirm', idempotencyKey: 'ef-confirm-00000001' }),
+    });
+    const d = await app2.request(`http://localhost/api/session/${token}/delivery`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: 'fail@example.com', consents: { reportDelivery: true, newsletter: false, pulse: false, followup: false }, idempotencyKey: 'ef-delivery-0000001' }),
+    });
+    expect(d.status).toBe(200);
+    const body = (await d.json()) as { emailDelivered: boolean; session: { status: string } };
+    expect(body.emailDelivered).toBe(false);
+    // report still available on screen afterwards
+    const rep = await app2.request(`http://localhost/api/session/${token}/preview`, { method: 'GET' });
+    expect([200, 409]).toContain(rep.status);
+  });
+});
+
+describe('admin consented export without strategy text (ADMIN-004, FR-038)', () => {
+  it('exports consented contact metadata only', async () => {
+    // seed a saved session + contact with newsletter + pulse consent
+    const mk = await api('POST', '/api/session', {
+      language: 'en', lens: 'technology', roleBand: 'c_suite', industryBand: 'integrated_resort_hospitality', privacyMode: 'save',
+    });
+    const { token } = mk.json as { token: string };
+    for (let i = 0; i < 8; i++) {
+      const stage = CORE_STAGES[i]!;
+      await api('POST', `/api/session/${token}/answer`, { stageId: stage, answer: `Export-answer ${stage} owner CTO deadline Q4 outcome measured with numbers and trade-offs.`, idempotencyKey: `ex-${stage}-000001` });
+    }
+    await api('POST', `/api/session/${token}/reflection`);
+    await api('POST', `/api/session/${token}/reflection/confirm`, { corrections: '', confirmation: 'confirm', idempotencyKey: 'ex-confirm-0000001' });
+    await api('POST', `/api/session/${token}/delivery`, { email: 'export-me@example.com', consents: { reportDelivery: true, newsletter: true, pulse: true, followup: false }, idempotencyKey: 'ex-delivery-0000001' });
+    const res = await app.request('http://localhost/api/admin/contacts/export', {
+      headers: { Authorization: 'Bearer admin-sec-tests-xyz' },
+    });
+    expect(res.status).toBe(200);
+    const csv = await res.text();
+    expect(csv).toContain('export-me@example.com');
+    expect(csv).toMatch(/newsletter,pulse/);
+    // no strategy/answer/report text anywhere
+    expect(csv).not.toContain('Export-answer');
+    expect(csv.toLowerCase()).not.toContain('strategy brief');
+  });
+});
+
+type EmailServiceShim = {
+  providerName: string;
+  sendReport(i: { to: string; language: string }): Promise<{ ok: boolean }>;
+  sendDeletionReceipt(i: { to: string }): Promise<{ ok: boolean }>;
+  sendConsentConfirmation(i: { to: string }): Promise<{ ok: boolean }>;
+};
