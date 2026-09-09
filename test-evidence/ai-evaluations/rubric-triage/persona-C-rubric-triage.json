@@ -2,39 +2,39 @@
   "persona": "C",
   "judge": {
     "scores": {
-      "Diagnosis specificity": 2,
+      "Diagnosis specificity": 3,
       "Crux quality": 3,
-      "Alternative quality": 2,
+      "Alternative quality": 3,
       "Choice clarity": 3,
       "Evidence traceability": 3,
-      "Assumption quality": 2,
+      "Assumption quality": 3,
       "Action coherence": 3,
       "Execution testability": 3,
-      "Governance integrity": 2
+      "Governance integrity": 3
     },
     "justifications": {
-      "Diagnosis specificity": "Symptoms are vague ('founder time is bottleneck') and confirmed diagnosis is not resolved; alternative diagnosis lacks support.",
-      "Crux quality": "Crux is clearly stated but lacks depth and evidence; alternatives considered are not integrated.",
-      "Alternative quality": "Alternatives are listed but lack tradeoffs and validation; no comparative analysis.",
-      "Choice clarity": "Decision is clear but pending owner decisions and criteria are not specified.",
-      "Evidence traceability": "Most statements are user facts or AI inferences with source IDs, but many lack sourceResponseId.",
-      "Assumption quality": "Assumptions are unvalidated and lack importance/impact analysis; no mitigation plans.",
-      "Action coherence": "Actions align with decision but lack sequencing and dependencies.",
-      "Execution testability": "Measures are defined but lack baselines and specific targets.",
-      "Governance integrity": "Risk reviews are placeholders ('Needs validation') and lack specificity; human approval noted but not detailed."
+      "Diagnosis specificity": "Symptoms are specific (founder bottleneck, two accounts), but candidate diagnoses lack support/counter-evidence and confirmed diagnosis is vague.",
+      "Crux quality": "Crux is clear but not sharply framed; whyNow is generic and alternatives are not mutually exclusive.",
+      "Alternative quality": "Three alternatives are distinct but lack detailed validation and tradeoffs are superficial.",
+      "Choice clarity": "Decision is clear but lacks explicit criteria and tradeoff analysis; winning aspiration is vague.",
+      "Evidence traceability": "Most statements are traceable to source responses, but some AI inferences lack evidence and limitations are acknowledged.",
+      "Assumption quality": "Assumptions are listed but unvalidated; no prioritization or testing plan.",
+      "Action coherence": "Actions align with decision but lack sequencing and dependencies; stop-defer is explicit.",
+      "Execution testability": "Measures are vague ('needs validation') and lack baselines; evidence gate is testable but incomplete.",
+      "Governance integrity": "Risks are placeholders; no approval chain or escalation; decision record is incomplete."
     },
     "fabricated_claims": 0,
     "traceable_statements": 12,
-    "material_statements_sampled": 20,
-    "missing_unknowns_handled": true,
+    "material_statements_sampled": 12,
+    "missing_unknowns_handled": false,
     "max_priorities": 1,
     "has_stop_defer": true,
     "hard_risks_require_human": true,
-    "notes": "Report is a draft with many placeholders; needs more specificity and validation."
+    "notes": "Report is adequate but lacks depth in validation and specificity; many placeholders reduce quality."
   },
   "reportSummary": {
-    "maxPriorities": 5,
-    "evidenceStatements": 9,
-    "riskReviews": 3
+    "maxPriorities": 3,
+    "evidenceStatements": 8,
+    "riskReviews": 2
   }
 }

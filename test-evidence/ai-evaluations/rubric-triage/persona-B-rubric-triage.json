@@ -13,28 +13,28 @@
       "Governance integrity": 2
     },
     "justifications": {
-      "Diagnosis specificity": "The diagnosis is vague, lacking specific data or validation. It mentions custom scope and asset capture but does not quantify or isolate causes.",
-      "Crux quality": "The crux is clear but not fully validated; it focuses on design partner acceptance but omits other critical uncertainties like margin achievability.",
-      "Alternative quality": "Alternatives are described at a high level with generic tradeoffs, lacking depth and specific evaluation criteria.",
-      "Choice clarity": "The choice is explicit but lacks specificity on segment selection and target margin, reducing clarity.",
-      "Evidence traceability": "Many statements are labeled as user assumptions or AI inferences without source citations, and some evidence lacks clear traceability.",
-      "Assumption quality": "Key assumptions are unvalidated and some are labeled 'plausible' without evidence, indicating weak assumption management.",
-      "Action coherence": "Actions are broadly aligned with the strategy but lack specific dates and clear dependencies, reducing coherence.",
-      "Execution testability": "Measures are defined but some thresholds are missing (e.g., margin improvement percentage), limiting testability.",
-      "Governance integrity": "Risk reviews are placeholder 'Needs validation' and lack specific risks, undermining governance integrity."
+      "Diagnosis specificity": "The diagnosis identifies custom scope and weak asset capture as primary drivers, but lacks specific data or analysis to confirm causality. Symptoms are vague, and the diagnosis is labeled as AI inference without supporting evidence.",
+      "Crux quality": "The crux is clearly stated and incorporates key constraints, but it is not sharply focused on the critical uncertainty (design partner acceptance) and lacks a decision point. It reads more as a general question than a strategic crux.",
+      "Alternative quality": "Alternatives are described at a high level with generic tradeoffs. They lack depth, specific evidence, or clear differentiation. Option B is favored but not rigorously compared against others.",
+      "Choice clarity": "The decision is explicit and confirmed by the user, but the rationale and commitment are not fully articulated. The choice contract lacks specificity on how the decision will be executed and what success looks like beyond vague aspirations.",
+      "Evidence traceability": "Many statements are labeled as AI inference or lack source references. User facts are present but not systematically linked to evidence. The report does not provide a clear evidence trail for key claims.",
+      "Assumption quality": "Assumptions are listed but many are unvalidated and lack importance ratings or mitigation plans. The register is incomplete and does not prioritize which assumptions are most critical to test.",
+      "Action coherence": "Actions are aligned with the chosen option but are high-level and lack sequencing or dependencies. They do not form a coherent portfolio that addresses all aspects of the strategy, such as asset capture or margin tracking.",
+      "Execution testability": "Evidence gates and measures are defined, but some thresholds are vague (e.g., 'target margin') and lack baseline data. The 90-day test is clear, but the overall testability is weakened by missing metrics and unclear data sources.",
+      "Governance integrity": "Risk reviews are placeholder text ('Needs validation') and lack specific risks or mitigation plans. The decision record is incomplete, with no approvedBy or revisit triggers. Governance processes are not clearly defined."
     },
     "fabricated_claims": 0,
-    "traceable_statements": 10,
+    "traceable_statements": 8,
     "material_statements_sampled": 20,
     "missing_unknowns_handled": false,
     "max_priorities": 1,
     "has_stop_defer": true,
     "hard_risks_require_human": true,
-    "notes": "The report has a clear decision but suffers from lack of specificity and validation. Many critical elements are marked 'Needs validation' or 'unvalidated', indicating incomplete analysis. The report would benefit from more concrete data and defined metrics."
+    "notes": "The report is a draft with many placeholders and unvalidated assumptions. It requires significant refinement to meet executive standards."
   },
   "reportSummary": {
-    "maxPriorities": 5,
-    "evidenceStatements": 10,
+    "maxPriorities": 3,
+    "evidenceStatements": 8,
     "riskReviews": 3
   }
 }

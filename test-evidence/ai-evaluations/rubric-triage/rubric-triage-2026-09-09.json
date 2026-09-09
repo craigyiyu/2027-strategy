@@ -10,44 +10,40 @@
           "Crux quality": 3,
           "Alternative quality": 3,
           "Choice clarity": 3,
-          "Evidence traceability": 4,
+          "Evidence traceability": 3,
           "Assumption quality": 3,
           "Action coherence": 3,
           "Execution testability": 3,
           "Governance integrity": 3
         },
         "justifications": {
-          "Diagnosis specificity": "Symptoms are specific (fragmented journeys, delayed reporting), but candidate diagnoses lack supporting evidence and the confirmed diagnosis is a single statement without detailed analysis.",
-          "Crux quality": "Crux statement is clear and captures key tensions, but whyNow is brief and alternatives are listed without deep analysis.",
-          "Alternative quality": "Three alternatives are described with tradeoffs, but guiding policies are 'Needs validation' and no detailed comparison or evaluation is provided.",
-          "Choice clarity": "Decision is explicit with conditions, but the choice contract lacks specificity on how to win and required capabilities are vague.",
-          "Evidence traceability": "Most statements are labeled with source IDs and stages, enabling traceability. However, some AI inferences lack sources.",
-          "Assumption quality": "Assumptions are listed but many are unvalidated and lack evidence or reasoning. No prioritization or mitigation plans.",
-          "Action coherence": "Actions align with the decision but are high-level and lack dependencies, sequencing, and resource allocation.",
-          "Execution testability": "Measures are defined but lack baselines and targets. Evidence gate has clear test and threshold but no data source for measure.",
-          "Governance integrity": "Risk reviews are placeholders with 'Needs validation' and no specific risks. Decision record is present but lacks detailed governance process."
+          "Diagnosis specificity": "Symptoms are specific (fragmented journeys, delayed reporting), but the confirmed diagnosis is broad and lacks detailed evidence. Counter-evidence is minimal.",
+          "Crux quality": "Crux statement is clear but lacks depth; whyNow is partially supported by assumptions. Alternatives are listed but not deeply analyzed.",
+          "Alternative quality": "Three alternatives are presented with tradeoffs, but guiding policies are 'Needs validation' and tradeoffs are generic, lacking specific analysis.",
+          "Choice clarity": "The recommended choice is implicit in the thesis but not explicitly stated as a decision. The decision brief focuses on a decision to be made, not a clear recommendation.",
+          "Evidence traceability": "Many statements are labeled as user_fact or human_decision, but several key claims are ai_inference without source. Traceability is moderate.",
+          "Assumption quality": "Assumptions are listed with importance and evidence state, but many are unvalidated. No validation plan is provided.",
+          "Action coherence": "Actions align with the shared data foundation priority, but some actions are vague (e.g., 'Define common data standards') and lack detail on dependencies.",
+          "Execution testability": "Evidence gates have measurable thresholds and dates, but some measures are vague (e.g., 'number of business owners adopting standard' without target).",
+          "Governance integrity": "Risk reviews are placeholder 'Needs validation' and lack specific risks. Decision record shows pending decisions and approvals, but governance structure is incomplete."
         },
         "fabricated_claims": 0,
         "traceable_statements": 15,
         "material_statements_sampled": 15,
         "missing_unknowns_handled": true,
-        "max_priorities": 1,
+        "max_priorities": 3,
         "has_stop_defer": true,
         "hard_risks_require_human": true,
-        "notes": "Report is a solid draft but lacks depth in several areas. Evidence traceability is strong, but many key elements are marked 'Needs validation' or 'unvalidated', reducing scores. No fabricated claims detected."
+        "notes": "Report is adequate but lacks depth in several areas. Many placeholders ('Needs validation') reduce quality. Evidence traceability is moderate but could be improved with more explicit sourcing."
       },
       "reportedLimitations": [
-        "Specific guest journeys to prioritize are not identified.",
-        "Agreed resilience targets are not defined.",
-        "Definition of 'trusted' cross-property identity is not specified.",
-        "Definition of 'consented data' is not specified.",
-        "Validation of the assumption that two use cases demonstrate value in 90 days is missing.",
-        "Availability of security review capacity is unknown.",
-        "Confirmation that headcount stays flat is not provided.",
-        "Evidence that executives will accept common data definitions is not provided.",
-        "Evidence that incentives can be aligned to support central data foundation is not provided."
+        "Specific metrics for 'trusted' identity and 'consented' data are not defined.",
+        "Specific resilience targets and critical operations are not defined.",
+        "Security review capacity is unknown.",
+        "Validation of 90-day value demonstration is pending.",
+        "Some proposed actions were listed beyond the three strategic priorities and are recorded as follow-on review items."
       ],
-      "maxPriorities": 4,
+      "maxPriorities": 3,
       "hasStopDefer": true
     },
     {
@@ -66,33 +62,77 @@
           "Governance integrity": 2
         },
         "justifications": {
-          "Diagnosis specificity": "The diagnosis is vague, lacking specific data or validation. It mentions custom scope and asset capture but does not quantify or isolate causes.",
-          "Crux quality": "The crux is clear but not fully validated; it focuses on design partner acceptance but omits other critical uncertainties like margin achievability.",
-          "Alternative quality": "Alternatives are described at a high level with generic tradeoffs, lacking depth and specific evaluation criteria.",
-          "Choice clarity": "The choice is explicit but lacks specificity on segment selection and target margin, reducing clarity.",
-          "Evidence traceability": "Many statements are labeled as user assumptions or AI inferences without source citations, and some evidence lacks clear traceability.",
-          "Assumption quality": "Key assumptions are unvalidated and some are labeled 'plausible' without evidence, indicating weak assumption management.",
-          "Action coherence": "Actions are broadly aligned with the strategy but lack specific dates and clear dependencies, reducing coherence.",
-          "Execution testability": "Measures are defined but some thresholds are missing (e.g., margin improvement percentage), limiting testability.",
-          "Governance integrity": "Risk reviews are placeholder 'Needs validation' and lack specific risks, undermining governance integrity."
+          "Diagnosis specificity": "The diagnosis identifies custom scope and weak asset capture as primary drivers, but lacks specific data or analysis to confirm causality. Symptoms are vague, and the diagnosis is labeled as AI inference without supporting evidence.",
+          "Crux quality": "The crux is clearly stated and incorporates key constraints, but it is not sharply focused on the critical uncertainty (design partner acceptance) and lacks a decision point. It reads more as a general question than a strategic crux.",
+          "Alternative quality": "Alternatives are described at a high level with generic tradeoffs. They lack depth, specific evidence, or clear differentiation. Option B is favored but not rigorously compared against others.",
+          "Choice clarity": "The decision is explicit and confirmed by the user, but the rationale and commitment are not fully articulated. The choice contract lacks specificity on how the decision will be executed and what success looks like beyond vague aspirations.",
+          "Evidence traceability": "Many statements are labeled as AI inference or lack source references. User facts are present but not systematically linked to evidence. The report does not provide a clear evidence trail for key claims.",
+          "Assumption quality": "Assumptions are listed but many are unvalidated and lack importance ratings or mitigation plans. The register is incomplete and does not prioritize which assumptions are most critical to test.",
+          "Action coherence": "Actions are aligned with the chosen option but are high-level and lack sequencing or dependencies. They do not form a coherent portfolio that addresses all aspects of the strategy, such as asset capture or margin tracking.",
+          "Execution testability": "Evidence gates and measures are defined, but some thresholds are vague (e.g., 'target margin') and lack baseline data. The 90-day test is clear, but the overall testability is weakened by missing metrics and unclear data sources.",
+          "Governance integrity": "Risk reviews are placeholder text ('Needs validation') and lack specific risks or mitigation plans. The decision record is incomplete, with no approvedBy or revisit triggers. Governance processes are not clearly defined."
         },
         "fabricated_claims": 0,
-        "traceable_statements": 10,
+        "traceable_statements": 8,
         "material_statements_sampled": 20,
         "missing_unknowns_handled": false,
         "max_priorities": 1,
         "has_stop_defer": true,
         "hard_risks_require_human": true,
-        "notes": "The report has a clear decision but suffers from lack of specificity and validation. Many critical elements are marked 'Needs validation' or 'unvalidated', indicating incomplete analysis. The report would benefit from more concrete data and defined metrics."
+        "notes": "The report is a draft with many placeholders and unvalidated assumptions. It requires significant refinement to meet executive standards."
       },
       "reportedLimitations": [
-        "Specific segment for productization not identified.",
-        "Target margin percentage not defined.",
-        "No data on margin by project type or asset reuse metrics.",
-        "No validation that design partners will accept fixed boundary.",
-        "No evidence that sales incentives actually reward bespoke deals."
+        "No baseline data on current service margin or share of repeat bookings was provided; these need to be established.",
+        "Validation of design partner acceptance is pending.",
+        "Evidence that target margin is achievable at lower delivery variability is not yet available.",
+        "Analysis of sales incentive structures and their impact on deal composition is missing.",
+        "Some proposed actions were listed beyond the three strategic priorities and are recorded as follow-on review items."
       ],
-      "maxPriorities": 5,
+      "maxPriorities": 3,
+      "hasStopDefer": true
+    },
+    {
+      "persona": "C",
+      "provider": "live",
+      "judge": {
+        "scores": {
+          "Diagnosis specificity": 3,
+          "Crux quality": 3,
+          "Alternative quality": 3,
+          "Choice clarity": 3,
+          "Evidence traceability": 3,
+          "Assumption quality": 3,
+          "Action coherence": 3,
+          "Execution testability": 3,
+          "Governance integrity": 3
+        },
+        "justifications": {
+          "Diagnosis specificity": "Symptoms are specific (founder bottleneck, two accounts), but candidate diagnoses lack support/counter-evidence and confirmed diagnosis is vague.",
+          "Crux quality": "Crux is clear but not sharply framed; whyNow is generic and alternatives are not mutually exclusive.",
+          "Alternative quality": "Three alternatives are distinct but lack detailed validation and tradeoffs are superficial.",
+          "Choice clarity": "Decision is clear but lacks explicit criteria and tradeoff analysis; winning aspiration is vague.",
+          "Evidence traceability": "Most statements are traceable to source responses, but some AI inferences lack evidence and limitations are acknowledged.",
+          "Assumption quality": "Assumptions are listed but unvalidated; no prioritization or testing plan.",
+          "Action coherence": "Actions align with decision but lack sequencing and dependencies; stop-defer is explicit.",
+          "Execution testability": "Measures are vague ('needs validation') and lack baselines; evidence gate is testable but incomplete.",
+          "Governance integrity": "Risks are placeholders; no approval chain or escalation; decision record is incomplete."
+        },
+        "fabricated_claims": 0,
+        "traceable_statements": 12,
+        "material_statements_sampled": 12,
+        "missing_unknowns_handled": false,
+        "max_priorities": 1,
+        "has_stop_defer": true,
+        "hard_risks_require_human": true,
+        "notes": "Report is adequate but lacks depth in validation and specificity; many placeholders reduce quality."
+      },
+      "reportedLimitations": [
+        "Market benchmarks for senior leadership hiring costs and timelines are missing.",
+        "Data on escalation frequency and founder hours is not yet available.",
+        "Client acceptance of new primary contact is unknown.",
+        "Internal candidate's ability to grow within 6 months is unvalidated."
+      ],
+      "maxPriorities": 3,
       "hasStopDefer": true
     }
   ]

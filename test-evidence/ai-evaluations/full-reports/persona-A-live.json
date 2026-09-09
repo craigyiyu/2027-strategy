@@ -3,47 +3,75 @@
  "language": "en",
  "modelId": "deepseek-chat",
  "promptVersion": "2026-09-09.1",
- "generatedAt": "2026-09-09T10:06:53.883Z",
- "strategyThesis": "Establish a shared data foundation with executive alignment, prove value through two journey pilots within 90 days, and achieve 80% consented identity coverage by Dec 31, 2027, while managing security review capacity and flat headcount.",
+ "generatedAt": "2026-09-09T10:13:25.132Z",
+ "strategyThesis": "Establish a shared, consented guest-data foundation by end-2027, enabling two high-value journey pilots to prove cross-property value, while deferring property-level app rebuilds and additional platform initiatives until evidence gates are met.",
  "decisionBrief": {
   "decision": {
-   "text": "Proceed with Option A: central data foundation first, with two journey pilots as proof points, subject to validation of key assumptions and a 31 Dec review gate.",
+   "text": "Decide by end of October whether the 2027 priority is a single customer-data platform or property-by-property digital experience upgrades.",
    "label": "human_decision",
-   "sourceResponseId": "Q5",
-   "sourceStage": "Q5",
-   "note": "User confirmed decision in reflection."
+   "sourceResponseId": "Q1",
+   "sourceStage": "Q1",
+   "note": "Confirmed by user in Q1."
   },
   "scope": [
    {
-    "text": "One shared data foundation that two journey use cases can consume.",
-    "label": "user_fact",
-    "sourceResponseId": "Q5",
-    "sourceStage": "Q5",
+    "text": "Customer data platform and data governance",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
     "note": null
    },
    {
-    "text": "Two journey pilots as proof points.",
-    "label": "user_fact",
-    "sourceResponseId": "Q5",
-    "sourceStage": "Q5",
+    "text": "Two journey use cases (to be defined)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "Cross-property identity and consent management",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "Resilience targets for critical operations",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
     "note": null
    }
   ],
-  "deadline": "2027-12-31",
+  "deadline": "End of October 2026",
   "approver": "Group CTO",
   "hardConstraints": [
    {
-    "text": "Headcount stays flat.",
-    "label": "user_assumption",
-    "sourceResponseId": "Q7",
-    "sourceStage": "Q7",
+    "text": "Headcount stays flat",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
     "note": null
    },
    {
-    "text": "Security review capacity is available (unknown).",
-    "label": "needs_validation",
-    "sourceResponseId": "Q7",
-    "sourceStage": "Q7",
+    "text": "No second major platform initiative in H1 2027",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "Security review capacity must be confirmed",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "All data use must be consented and compliant",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
     "note": null
    }
   ]
@@ -51,13 +79,6 @@
  "evidenceBase": [
   {
    "text": "Guest journeys are fragmented across properties and reporting is delayed by weeks.",
-   "label": "user_fact",
-   "sourceResponseId": "Q2",
-   "sourceStage": "Q2",
-   "note": null
-  },
-  {
-   "text": "Several properties will keep buying local solutions unless we change the decision frame.",
    "label": "user_fact",
    "sourceResponseId": "Q2",
    "sourceStage": "Q2",
@@ -79,14 +100,14 @@
   },
   {
    "text": "Priority: one shared data foundation that two journey use cases can consume.",
-   "label": "user_fact",
+   "label": "human_decision",
    "sourceResponseId": "Q5",
    "sourceStage": "Q5",
    "note": null
   },
   {
    "text": "Deliberately not now: property-by-property app rebuilds and a second major platform initiative in H1.",
-   "label": "user_fact",
+   "label": "human_decision",
    "sourceResponseId": "Q5",
    "sourceStage": "Q5",
    "note": null
@@ -135,21 +156,21 @@
   },
   {
    "text": "By 31 December, two journey pilots reach 80% consented identity coverage with named business owners adopting the data standard; otherwise pause the platform commitment.",
-   "label": "user_fact",
+   "label": "human_decision",
    "sourceResponseId": "Q8",
    "sourceStage": "Q8",
    "note": null
   },
   {
    "text": "Owner: Group CTO.",
-   "label": "user_fact",
+   "label": "human_decision",
    "sourceResponseId": "Q8",
    "sourceStage": "Q8",
    "note": null
   },
   {
    "text": "Review date: 31 Dec.",
-   "label": "user_fact",
+   "label": "human_decision",
    "sourceResponseId": "Q8",
    "sourceStage": "Q8",
    "note": null
@@ -158,15 +179,15 @@
  "challengeDiagnosis": {
   "symptoms": [
    {
-    "text": "Guest journeys are fragmented across properties.",
+    "text": "Guest journeys are fragmented across properties and reporting is delayed by weeks.",
     "label": "user_fact",
     "sourceResponseId": "Q2",
     "sourceStage": "Q2",
     "note": null
    },
    {
-    "text": "Reporting is delayed by weeks.",
-    "label": "user_fact",
+    "text": "Several properties will keep buying local solutions unless we change the decision frame.",
+    "label": "user_assumption",
     "sourceResponseId": "Q2",
     "sourceStage": "Q2",
     "note": null
@@ -175,30 +196,39 @@
   "candidateDiagnoses": [
    {
     "diagnosis": "Fragmented ownership and inconsistent data definitions prevent a unified data foundation.",
-    "support": [],
-    "counter_evidence": []
+    "support": [
+     "Guest journeys are fragmented across properties and reporting is delayed by weeks.",
+     "Several properties will keep buying local solutions unless we change the decision frame."
+    ],
+    "counter_evidence": [
+     "Incentives reward local delivery, so teams build around the centre."
+    ]
    },
    {
-    "diagnosis": "Incentives reward local delivery, causing teams to build around the centre.",
-    "support": [],
-    "counter_evidence": []
+    "diagnosis": "Incentives reward local delivery, so teams build around the centre.",
+    "support": [
+     "Several properties will keep buying local solutions unless we change the decision frame."
+    ],
+    "counter_evidence": [
+     "Fragmented ownership and inconsistent data definitions are preventing the result."
+    ]
    }
   ],
   "confirmedDiagnosis": {
-   "text": "Fragmented ownership and inconsistent data definitions are the leading explanation preventing the result.",
-   "label": "user_fact",
+   "text": "Fragmented ownership and inconsistent data definitions prevent a unified data foundation, reinforced by incentives that reward local delivery.",
+   "label": "ai_inference",
    "sourceResponseId": "Q4",
    "sourceStage": "Q4",
-   "note": null
+   "note": "Synthesized from user's leading explanation and alternative."
   }
  },
  "crux": {
   "cruxStatement": {
-   "text": "Can we establish a shared data foundation with executive alignment and prove value through two journey pilots within 90 days, while managing security review capacity and flat headcount?",
+   "text": "Whether to invest in a central data foundation first or enable property-level pilots, given fragmented ownership and local incentives.",
    "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "note": "Synthesized from user answers."
+   "sourceResponseId": "Q4",
+   "sourceStage": "Q4",
+   "note": "Derived from proposed crux."
   },
   "whyNow": [
    {
@@ -209,8 +239,8 @@
     "note": null
    },
    {
-    "text": "Several properties will keep buying local solutions unless we change the decision frame.",
-    "label": "user_fact",
+    "text": "Properties continue to buy local solutions, risking further fragmentation.",
+    "label": "user_assumption",
     "sourceResponseId": "Q2",
     "sourceStage": "Q2",
     "note": null
@@ -224,46 +254,67 @@
  },
  "strategicAlternatives": [
   {
-   "name": "Option A: Central data foundation first",
+   "name": "Option A: Central Data Foundation First",
    "guidingPolicy": "Needs validation.",
-   "whereToPlay": "Cross-property shared data platform",
-   "howToWin": "Establish a single source of truth for guest data, enabling consistent identity and consent management.",
+   "whereToPlay": "Group-wide shared data platform",
+   "howToWin": "Establish a single source of truth for guest data, enabling consistent reporting and cross-property analytics.",
    "tradeoffs": [
     {
-     "text": "Trades speed for control: slower initial delivery but greater consistency and governance.",
-     "label": "user_fact",
-     "sourceResponseId": "Q6",
-     "sourceStage": "Q6",
+     "text": "Speed: slower to deliver value as foundation build takes time; risk of losing momentum.",
+     "label": "ai_inference",
+     "sourceResponseId": null,
+     "sourceStage": null,
+     "note": null
+    },
+    {
+     "text": "Control: high control over data standards and governance, but may face resistance from properties.",
+     "label": "ai_inference",
+     "sourceResponseId": null,
+     "sourceStage": null,
      "note": null
     }
    ]
   },
   {
-   "name": "Option B: Two journey pilots on a thin shared layer",
+   "name": "Option B: Two Journey Pilots on Thin Shared Layer",
    "guidingPolicy": "Needs validation.",
-   "whereToPlay": "Two specific guest journey use cases",
-   "howToWin": "Deliver quick value with minimal infrastructure, learning what works before scaling.",
+   "whereToPlay": "Two specific guest journey use cases across properties",
+   "howToWin": "Demonstrate value quickly with minimal infrastructure, learning what works before scaling.",
    "tradeoffs": [
     {
-     "text": "Trades scale for learning: limited initial impact but faster insights.",
-     "label": "user_fact",
-     "sourceResponseId": "Q6",
-     "sourceStage": "Q6",
+     "text": "Scale: limited to two pilots, may not address broader fragmentation.",
+     "label": "ai_inference",
+     "sourceResponseId": null,
+     "sourceStage": null,
+     "note": null
+    },
+    {
+     "text": "Learning: high learning value, but risk of pilots not being representative.",
+     "label": "ai_inference",
+     "sourceResponseId": null,
+     "sourceStage": null,
      "note": null
     }
    ]
   },
   {
-   "name": "Option C: Common standards with property autonomy",
+   "name": "Option C: Common Standards with Property Autonomy",
    "guidingPolicy": "Needs validation.",
-   "whereToPlay": "Property-level digital experiences with shared standards",
-   "howToWin": "Enable local innovation while ensuring interoperability through common data standards.",
+   "whereToPlay": "All properties with defined data standards",
+   "howToWin": "Enable local innovation while ensuring interoperability through common standards.",
    "tradeoffs": [
     {
-     "text": "Trades consistency for adoption: higher buy-in but risk of fragmentation.",
-     "label": "user_fact",
-     "sourceResponseId": "Q6",
-     "sourceStage": "Q6",
+     "text": "Consistency: risk of inconsistent implementation across properties.",
+     "label": "ai_inference",
+     "sourceResponseId": null,
+     "sourceStage": null,
+     "note": null
+    },
+    {
+     "text": "Adoption: higher adoption due to autonomy, but may lead to fragmentation if standards are not enforced.",
+     "label": "ai_inference",
+     "sourceResponseId": null,
+     "sourceStage": null,
      "note": null
     }
    ]
@@ -278,97 +329,124 @@
    "note": null
   },
   "whereToPlay": {
-   "text": "One shared data foundation that two journey use cases can consume.",
-   "label": "user_fact",
+   "text": "Two journey use cases that can demonstrate value from a shared data foundation.",
+   "label": "ai_inference",
+   "sourceResponseId": "Q5",
+   "sourceStage": "Q5",
+   "note": "Derived from priority."
+  },
+  "howToWin": {
+   "text": "Establish one shared data foundation with common data definitions and governance, and run two pilots to prove value.",
+   "label": "human_decision",
    "sourceResponseId": "Q5",
    "sourceStage": "Q5",
    "note": null
   },
-  "howToWin": {
-   "text": "Establish a central data foundation first, with two journey pilots as proof points, subject to validation of key assumptions and a 31 Dec review gate.",
-   "label": "human_decision",
-   "sourceResponseId": "Q5",
-   "sourceStage": "Q5",
-   "note": "User confirmed decision in reflection."
-  },
   "requiredCapabilities": [
    {
-    "text": "Executive alignment on common data definitions.",
-    "label": "user_assumption",
-    "sourceResponseId": "Q7",
-    "sourceStage": "Q7",
+    "text": "Data governance and standards",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
     "note": null
    },
    {
-    "text": "Security review capacity.",
-    "label": "needs_validation",
-    "sourceResponseId": "Q7",
-    "sourceStage": "Q7",
+    "text": "Consent management",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "Cross-property identity resolution",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "Agile pilot execution",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "Change management",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
     "note": null
    }
   ],
   "managementSystems": [
    {
-    "text": "90-day evidence gate with owner, test, threshold, review date, and decision rule.",
+    "text": "Data governance council",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
-    "note": "Derived from user's Q8."
+    "note": null
+   },
+   {
+    "text": "Pilot review board",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
+   },
+   {
+    "text": "Executive sponsorship",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": null
    }
   ]
  },
  "assumptionRegister": [
   {
-   "assumption": "Decision by end of October.",
-   "label": "ai_inference",
+   "assumption": "Several properties will keep buying local solutions unless we change the decision frame.",
+   "label": "user_assumption",
    "sourceResponseId": null,
    "sourceStage": null,
    "importance": "important",
    "evidenceState": "unvalidated"
   },
   {
-   "assumption": "Owned by the Group CTO.",
-   "label": "ai_inference",
+   "assumption": "Fragmented ownership and inconsistent data definitions are preventing the result.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "plausible"
+  },
+  {
+   "assumption": "Incentives reward local delivery, so teams build around the centre.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "plausible"
+  },
+  {
+   "assumption": "Executives accept common data definitions.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "plausible"
+  },
+  {
+   "assumption": "Two use cases demonstrate value in 90 days.",
+   "label": "user_assumption",
    "sourceResponseId": null,
    "sourceStage": null,
    "importance": "important",
    "evidenceState": "unvalidated"
   },
   {
-   "assumption": "Fragmented ownership and inconsistent data definitions are the leading explanation preventing the result.",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Incentives reward local delivery, causing teams to build around the centre as an alternative explanation.",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Executives accept common data definitions (plausible).",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Two use cases demonstrate value in 90 days (unvalidated).",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Security review capacity is available (unknown).",
-   "label": "ai_inference",
+   "assumption": "Security review capacity is available.",
+   "label": "user_assumption",
    "sourceResponseId": null,
    "sourceStage": null,
    "importance": "important",
@@ -376,7 +454,7 @@
   },
   {
    "assumption": "Headcount stays flat.",
-   "label": "ai_inference",
+   "label": "user_assumption",
    "sourceResponseId": null,
    "sourceStage": null,
    "importance": "important",
@@ -384,22 +462,36 @@
   }
  ],
  "reverseEconomics": {
-  "mustBeTrueForValue": [],
-  "mustBeTrueForCost": [],
+  "mustBeTrueForValue": [
+   "Executives accept common data definitions.",
+   "Two use cases demonstrate value in 90 days.",
+   "Security review capacity is available."
+  ],
+  "mustBeTrueForCost": [
+   "Headcount stays flat.",
+   "No second major platform initiative in H1."
+  ],
   "statements": [
    {
-    "text": "If executives do not accept common data definitions, the central foundation will face resistance and may fail.",
+    "text": "If executives do not accept common data definitions, the shared foundation will not deliver cross-property value.",
     "label": "ai_inference",
-    "sourceResponseId": null,
-    "sourceStage": null,
+    "sourceResponseId": "Q7",
+    "sourceStage": "Q7",
     "note": "AI inference — needs validation"
    },
    {
     "text": "If two use cases do not demonstrate value in 90 days, the platform commitment should be paused.",
-    "label": "user_fact",
+    "label": "human_decision",
     "sourceResponseId": "Q8",
     "sourceStage": "Q8",
     "note": null
+   },
+   {
+    "text": "If security review capacity is unavailable, pilots may face delays and compliance risks.",
+    "label": "ai_inference",
+    "sourceResponseId": "Q7",
+    "sourceStage": "Q7",
+    "note": "AI inference — needs validation"
    }
   ]
  },
@@ -407,49 +499,59 @@
   {
    "owner": "Group CTO",
    "test": "Two journey pilots reach 80% consented identity coverage with named business owners adopting the data standard.",
-   "threshold": "80% consented identity coverage and named business owners adopting the data standard.",
-   "reviewDate": "2027-12-31",
+   "threshold": "80% consented identity coverage and named business owners adopting the standard.",
+   "reviewDate": "2026-12-31",
    "decisionRule": "adjust",
-   "measure": "Consented identity coverage percentage and number of business owners adopting the standard."
+   "measure": "Percentage of consented identity coverage and number of business owners adopting standard."
+  },
+  {
+   "owner": "Group CTO",
+   "test": "Executives accept common data definitions.",
+   "threshold": "Formal sign-off from executive team on data definitions.",
+   "reviewDate": "2026-11-30",
+   "decisionRule": "adjust",
+   "measure": "Number of executives signed off."
+  },
+  {
+   "owner": "CISO",
+   "test": "Security review capacity is available for pilots.",
+   "threshold": "Dedicated security resources allocated to pilots.",
+   "reviewDate": "2026-11-15",
+   "decisionRule": "adjust",
+   "measure": "Availability of security review resources."
   }
  ],
  "actionPortfolio": [
   {
-   "action": "Establish executive alignment on common data definitions.",
+   "action": "Define common data standards and governance framework",
    "owner": "Group CTO",
-   "milestone": "By end of October, obtain executive sign-off on data definitions.",
+   "milestone": "Data standards document approved by executive team by Nov 30",
    "supportsPriority": "Shared data foundation"
   },
   {
-   "action": "Launch two journey pilots on the central data foundation.",
+   "action": "Select two journey use cases for pilots",
    "owner": "Group CTO",
-   "milestone": "By 31 December, pilots reach 80% consented identity coverage.",
+   "milestone": "Use cases selected by Nov 15",
    "supportsPriority": "Journey pilots"
   },
   {
-   "action": "Implement data governance and standards.",
+   "action": "Implement consent management and identity resolution capabilities",
    "owner": "Group CTO",
-   "milestone": "By 31 December, data standards adopted by named business owners.",
-   "supportsPriority": "Shared data foundation"
-  },
-  {
-   "action": "Conduct security review capacity assessment.",
-   "owner": "Group CTO",
-   "milestone": "By 30 November, confirm availability of security review resources.",
+   "milestone": "Capabilities available for pilots by Dec 1",
    "supportsPriority": "Shared data foundation"
   }
  ],
  "stopDefer": [
   {
    "text": "Property-by-property app rebuilds are deliberately not now.",
-   "label": "user_fact",
+   "label": "human_decision",
    "sourceResponseId": "Q5",
    "sourceStage": "Q5",
    "note": null
   },
   {
-   "text": "A second major platform initiative in H1 is deliberately not now.",
-   "label": "user_fact",
+   "text": "A second major platform initiative in H1 is deliberately deferred.",
+   "label": "human_decision",
    "sourceResponseId": "Q5",
    "sourceStage": "Q5",
    "note": null
@@ -457,25 +559,25 @@
  ],
  "executionMeasures": [
   {
-   "measure": "Percentage of prioritized guest journeys using trusted cross-property identity and consented data.",
+   "measure": "Percentage of consented identity coverage across pilot properties",
    "kind": "outcome",
-   "dataSource": "Data platform analytics",
+   "dataSource": "Pilot tracking system",
    "owner": "Group CTO",
-   "cadence": "Monthly"
+   "cadence": "Weekly"
   },
   {
-   "measure": "Number of properties adopting the common data standard.",
+   "measure": "Number of business owners adopting data standard",
    "kind": "outcome",
    "dataSource": "Governance records",
    "owner": "Group CTO",
-   "cadence": "Monthly"
+   "cadence": "Bi-weekly"
   },
   {
-   "measure": "Security review backlog and capacity utilization.",
+   "measure": "Number of properties requesting local solutions",
    "kind": "outcome",
-   "dataSource": "Security operations",
-   "owner": "CISO",
-   "cadence": "Weekly"
+   "dataSource": "Procurement requests",
+   "owner": "Group CTO",
+   "cadence": "Monthly"
   }
  ],
  "riskReviews": [
@@ -510,7 +612,7 @@
    "risk": "Needs validation.",
    "area": "regulatory",
    "requiresHumanApproval": true,
-   "reviewOwner": "General Counsel",
+   "reviewOwner": "Chief Compliance Officer",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null
@@ -518,24 +620,26 @@
  ],
  "decisionRecord": {
   "confirmedDecision": {
-   "text": "Proceed with Option A: central data foundation first, with two journey pilots as proof points, subject to validation of key assumptions and a 31 Dec review gate.",
+   "text": "Decide by end of October whether the 2027 priority is a single customer-data platform or property-by-property digital experience upgrades.",
    "label": "human_decision",
-   "sourceResponseId": "Q5",
-   "sourceStage": "Q5",
-   "note": "User confirmed decision in reflection."
+   "sourceResponseId": "Q1",
+   "sourceStage": "Q1",
+   "note": null
   },
   "pendingOwnerDecisions": [
-   "Security review capacity availability (CISO)",
-   "Executive sign-off on data definitions (Group CTO)"
+   "Selection of two journey use cases",
+   "Definition of 'trusted' identity and 'consented' data",
+   "Specific resilience targets and critical operations",
+   "Review follow-on action (post-first-90-days): Run two journey pilots",
+   "Review follow-on action (post-first-90-days): Establish data governance council",
+   "Review follow-on action (post-first-90-days): Communicate decision frame to properties to discourage local solutions"
   ],
   "revisitTriggers": [
-   "If 90-day pilots do not achieve 80% consented identity coverage, pause platform commitment.",
-   "If security review capacity is insufficient, reassess timeline."
+   "If pilots do not meet 80% consented identity coverage by Dec 31",
+   "If executive alignment on data definitions fails"
   ],
-  "reviewCadence": "Monthly progress reviews; formal gate on 31 Dec.",
-  "approvedBy": [
-   "Group CTO"
-  ]
+  "reviewCadence": "Monthly",
+  "approvedBy": []
  },
  "readinessSnapshot": [
   {
@@ -565,15 +669,11 @@
   }
  ],
  "limitations": [
-  "Specific guest journeys to prioritize are not identified.",
-  "Agreed resilience targets are not defined.",
-  "Definition of 'trusted' cross-property identity is not specified.",
-  "Definition of 'consented data' is not specified.",
-  "Validation of the assumption that two use cases demonstrate value in 90 days is missing.",
-  "Availability of security review capacity is unknown.",
-  "Confirmation that headcount stays flat is not provided.",
-  "Evidence that executives will accept common data definitions is not provided.",
-  "Evidence that incentives can be aligned to support central data foundation is not provided."
+  "Specific metrics for 'trusted' identity and 'consented' data are not defined.",
+  "Specific resilience targets and critical operations are not defined.",
+  "Security review capacity is unknown.",
+  "Validation of 90-day value demonstration is pending.",
+  "Some proposed actions were listed beyond the three strategic priorities and are recorded as follow-on review items."
  ],
  "stopDeferExplicit": true
 }

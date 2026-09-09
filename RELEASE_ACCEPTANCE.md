@@ -17,7 +17,7 @@ manual rubric/visual/bilingual items before public launch.
 |---|---|---|
 | Automated build | PASS | typecheck 0 errors; web production build OK |
 | Product behavior | PASS | 38 server unit/integration + 5 critical E2E (landing, anonymous happy path → 12-section report, admin auth + funnel, EN/ZH smoke, saved-report path) |
-| AI quality | CONDITIONAL — threshold not yet met | live DeepSeek A/C full reports; judge triage (deepseek-chat, temp 0) mean A 2.56 / C 1.78, 0 fabrications, ≤1 priority, Stop/Defer present; B borderline-refused once (substantive<5); D/E correctly refuse. Human rubric review pending — AI-001..007/009/013..016/018..020 remain Not Run. Full report bodies archived under test-evidence/ai-evaluations/full-reports/ |
+| AI quality | CONDITIONAL — threshold not yet met | live DeepSeek A/B/C full reports after prompt hardening (no placeholders, provenance source_stage, 2–3 synthesized priorities, non-empty trade-offs, hard 3-priority cap, temp 0). Judge triage (deepseek-chat): final run means A 3.00 / B 2.44 / C 3.00, 0 fabrications, traceability A 15/15, C 12/12, Stop/Defer always present; D/E correctly refuse (insufficient input). Human rubric review pending for AI-009/013..016/018..020. Follow-up quality fixtures AI-001..007 recorded Pass with live evidence (test-evidence/ai-evaluations/followups). Full report bodies under test-evidence/ai-evaluations/full-reports/ |
 | Trust and safety | PASS | sensitive blocking, consent independence, deletion + neutrality, cross-session, audited reveal, injection, token hash, encryption-at-rest tests green |
 | Product owner acceptance | NOT COMPLETE | manual review runbook provided in test-evidence/manual-qa-runbook.md |
 
@@ -25,7 +25,7 @@ manual rubric/visual/bilingual items before public launch.
 - P0 CSV cases: 80/99 Pass with automated evidence; 0 failing (19 Not Run = manual/AI-rubric by design — human authority per UAT plan)
 - Release blockers (of 91): 74 Pass via E2E/integration/unit/AI fixtures; 17 pending human rubric/manual review
 - Open S0/S1: 0 in automated suites
-- AI rubric mean: PENDING human scoring (outputs archived)
+- AI rubric mean (judge triage, final run): A 3.00, B 2.44, C 3.00 — human rubric scoring still required (UAT §6.1)
 - Traceability: provenance labels verified in report E2E (User fact/AI inference/Needs validation chips)
 - Fabricated claims: live personas show 0 fabricated citations in sample review; rubric scoring pending
 - Accessibility critical/serious: 0 (axe, 7 states)

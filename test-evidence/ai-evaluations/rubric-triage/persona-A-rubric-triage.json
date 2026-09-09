@@ -6,35 +6,35 @@
       "Crux quality": 3,
       "Alternative quality": 3,
       "Choice clarity": 3,
-      "Evidence traceability": 4,
+      "Evidence traceability": 3,
       "Assumption quality": 3,
       "Action coherence": 3,
       "Execution testability": 3,
       "Governance integrity": 3
     },
     "justifications": {
-      "Diagnosis specificity": "Symptoms are specific (fragmented journeys, delayed reporting), but candidate diagnoses lack supporting evidence and the confirmed diagnosis is a single statement without detailed analysis.",
-      "Crux quality": "Crux statement is clear and captures key tensions, but whyNow is brief and alternatives are listed without deep analysis.",
-      "Alternative quality": "Three alternatives are described with tradeoffs, but guiding policies are 'Needs validation' and no detailed comparison or evaluation is provided.",
-      "Choice clarity": "Decision is explicit with conditions, but the choice contract lacks specificity on how to win and required capabilities are vague.",
-      "Evidence traceability": "Most statements are labeled with source IDs and stages, enabling traceability. However, some AI inferences lack sources.",
-      "Assumption quality": "Assumptions are listed but many are unvalidated and lack evidence or reasoning. No prioritization or mitigation plans.",
-      "Action coherence": "Actions align with the decision but are high-level and lack dependencies, sequencing, and resource allocation.",
-      "Execution testability": "Measures are defined but lack baselines and targets. Evidence gate has clear test and threshold but no data source for measure.",
-      "Governance integrity": "Risk reviews are placeholders with 'Needs validation' and no specific risks. Decision record is present but lacks detailed governance process."
+      "Diagnosis specificity": "Symptoms are specific (fragmented journeys, delayed reporting), but the confirmed diagnosis is broad and lacks detailed evidence. Counter-evidence is minimal.",
+      "Crux quality": "Crux statement is clear but lacks depth; whyNow is partially supported by assumptions. Alternatives are listed but not deeply analyzed.",
+      "Alternative quality": "Three alternatives are presented with tradeoffs, but guiding policies are 'Needs validation' and tradeoffs are generic, lacking specific analysis.",
+      "Choice clarity": "The recommended choice is implicit in the thesis but not explicitly stated as a decision. The decision brief focuses on a decision to be made, not a clear recommendation.",
+      "Evidence traceability": "Many statements are labeled as user_fact or human_decision, but several key claims are ai_inference without source. Traceability is moderate.",
+      "Assumption quality": "Assumptions are listed with importance and evidence state, but many are unvalidated. No validation plan is provided.",
+      "Action coherence": "Actions align with the shared data foundation priority, but some actions are vague (e.g., 'Define common data standards') and lack detail on dependencies.",
+      "Execution testability": "Evidence gates have measurable thresholds and dates, but some measures are vague (e.g., 'number of business owners adopting standard' without target).",
+      "Governance integrity": "Risk reviews are placeholder 'Needs validation' and lack specific risks. Decision record shows pending decisions and approvals, but governance structure is incomplete."
     },
     "fabricated_claims": 0,
     "traceable_statements": 15,
     "material_statements_sampled": 15,
     "missing_unknowns_handled": true,
-    "max_priorities": 1,
+    "max_priorities": 3,
     "has_stop_defer": true,
     "hard_risks_require_human": true,
-    "notes": "Report is a solid draft but lacks depth in several areas. Evidence traceability is strong, but many key elements are marked 'Needs validation' or 'unvalidated', reducing scores. No fabricated claims detected."
+    "notes": "Report is adequate but lacks depth in several areas. Many placeholders ('Needs validation') reduce quality. Evidence traceability is moderate but could be improved with more explicit sourcing."
   },
   "reportSummary": {
-    "maxPriorities": 4,
-    "evidenceStatements": 15,
+    "maxPriorities": 3,
+    "evidenceStatements": 14,
     "riskReviews": 4
   }
 }
