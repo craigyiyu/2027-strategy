@@ -5,6 +5,11 @@
 quality personas; product-owner human sign-off is required for the remaining
 manual rubric/visual/bilingual items before public launch.
 
+### P0 functional coverage (37/37)
+Every one of the 37 P0 functional requirements (FR-001…FR-040 P0 subset) has at
+least one passing evidenced CSV case (verified programmatically 2026-09-09).
+0 open S0/S1 defects in automated suites.
+
 ## Environment
 - Preview URL (this host): http://127.0.0.1:3317 (single-port API + SPA; deterministic mode)
 - Commit: `32cda67` (HEAD at acceptance; see `git log`)
@@ -22,8 +27,8 @@ manual rubric/visual/bilingual items before public launch.
 | Product owner acceptance | NOT COMPLETE | manual review runbook provided in test-evidence/manual-qa-runbook.md |
 
 ## Metrics
-- P0 CSV cases: 80/99 Pass with automated evidence; 0 failing (19 Not Run = manual/AI-rubric by design — human authority per UAT plan)
-- Release blockers (of 91): 74 Pass via E2E/integration/unit/AI fixtures; 17 pending human rubric/manual review
+- P0 CSV cases: 87/99 Pass with automated evidence; 0 failing (12 Not Run = manual/AI-rubric by design — human authority per UAT plan)
+- Release blockers (of 91): 79 Pass via E2E/integration/unit/AI fixtures; 12 pending human rubric/manual review
 - Open S0/S1: 0 in automated suites
 - AI rubric mean (judge triage, final run): A 3.00, B 2.44, C 3.00 — human rubric scoring still required (UAT §6.1)
 - Traceability: provenance labels verified in report E2E (User fact/AI inference/Needs validation chips)
