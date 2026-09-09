@@ -1,0 +1,498 @@
+{
+ "schemaVersion": "1.0",
+ "language": "en",
+ "modelId": "deepseek-chat",
+ "promptVersion": "2026-09-09.1",
+ "generatedAt": "2026-09-09T09:55:26.879Z",
+ "strategyThesis": "Productize one AI consulting segment with a fixed service boundary to convert bespoke delivery into a repeatable managed service, validated by three paid design partners within 90 days, aiming to raise recurring revenue and lower delivery variability by Q4 2027.",
+ "decisionBrief": {
+  "decision": {
+   "text": "Productize one segment with a fixed service boundary, validated by three paid design partners within 90 days. (human_decision)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  "scope": [
+   {
+    "text": "One AI consulting segment",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Fixed service boundary",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Three paid design partners",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "90-day validation period",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   }
+  ],
+  "deadline": "End of November for decision; 90-day validation from start",
+  "approver": "Services Director",
+  "hardConstraints": [
+   {
+    "text": "No additional senior architects for two quarters (user_fact)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Target margin must be achievable at lower delivery variability (user_assumption)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   }
+  ]
+ },
+ "evidenceBase": [
+  {
+   "text": "Demand has increased while delivery margin is falling. (user_fact)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  {
+   "text": "Custom scope is the main cause and reusable assets are not being captured. (user_assumption)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  {
+   "text": "Sales incentives reward bespoke deals, so the pipeline is shaped the wrong way. (user_assumption)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  {
+   "text": "No additional senior architects for two quarters. (user_fact)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  {
+   "text": "Within 90 days, sell three paid design partners against the fixed service boundary and target margin; review at end of quarter; adjust if fewer than two sign. (user_fact)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  {
+   "text": "Decision owner: services director; decided by end of November. (user_fact)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  }
+ ],
+ "challengeDiagnosis": {
+  "symptoms": [
+   {
+    "text": "Delivery margin is falling while demand increases. (user_fact)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Reusable assets are not being captured. (user_assumption)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   }
+  ],
+  "candidateDiagnoses": [
+   {
+    "diagnosis": "Custom scope and weak asset capture drive margin erosion.",
+    "support": [
+     "Demand has increased while delivery margin is falling. (user_fact)",
+     "Custom scope is the main cause and reusable assets are not being captured. (user_assumption)"
+    ],
+    "counter_evidence": [
+     "Sales incentives reward bespoke deals, so the pipeline is shaped the wrong way. (user_assumption)"
+    ]
+   },
+   {
+    "diagnosis": "Sales incentives misalign pipeline toward bespoke deals.",
+    "support": [
+     "Sales incentives reward bespoke deals, so the pipeline is shaped the wrong way. (user_assumption)"
+    ],
+    "counter_evidence": [
+     "Custom scope is the main cause and reusable assets are not being captured. (user_assumption)"
+    ]
+   }
+  ],
+  "confirmedDiagnosis": {
+   "text": "Custom scope and weak asset capture are the primary drivers of margin erosion, with sales incentives as a contributing factor. (ai_inference)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  }
+ },
+ "crux": {
+  "cruxStatement": {
+   "text": "Can we validate that a fixed service boundary will attract three paid design partners and achieve target margin within 90 days, given no additional senior architects? (ai_inference)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  "whyNow": [
+   {
+    "text": "Demand is increasing, providing market pull. (user_fact)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Margin decline is immediate and pressing. (user_fact)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "No additional senior architects for two quarters forces efficiency. (user_fact)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   }
+  ],
+  "alternativesConsidered": [
+   "Remain bespoke and grow volume. (user_fact)",
+   "Productize one segment with a defined service boundary. (user_fact)",
+   "Partner-led delivery for the long tail. (user_fact)"
+  ]
+ },
+ "strategicAlternatives": [
+  {
+   "name": "Option A: Remain bespoke and grow volume",
+   "guidingPolicy": "Needs validation.",
+   "whereToPlay": "All current segments, custom projects",
+   "howToWin": "Leverage existing sales incentives and delivery capacity",
+   "tradeoffs": []
+  },
+  {
+   "name": "Option B: Productize one segment with a defined service boundary",
+   "guidingPolicy": "Needs validation.",
+   "whereToPlay": "One selected AI consulting segment",
+   "howToWin": "Fixed scope, reusable assets, lower delivery variability",
+   "tradeoffs": []
+  },
+  {
+   "name": "Option C: Partner-led delivery for the long tail",
+   "guidingPolicy": "Needs validation.",
+   "whereToPlay": "Long-tail of small projects",
+   "howToWin": "Leverage partners to handle volume",
+   "tradeoffs": []
+  }
+ ],
+ "choiceContract": {
+  "winningAspiration": {
+   "text": "By Q4 2027, recurring revenue is higher and delivery variability is lower, shown by service margin and share of repeat bookings. (user_fact)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  "whereToPlay": {
+   "text": "One AI consulting segment with a fixed service boundary. (human_decision)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  "howToWin": {
+   "text": "Productize the segment, capture reusable assets, and validate with three paid design partners within 90 days. (human_decision)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  "requiredCapabilities": [
+   {
+    "text": "Service productization skills (ai_inference)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Asset capture and reuse processes (ai_inference)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Sales capability to sell fixed-boundary engagements (ai_inference)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   }
+  ],
+  "managementSystems": [
+   {
+    "text": "Quarterly review of design partner progress (human_decision)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Margin tracking per engagement (ai_inference)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   }
+  ]
+ },
+ "assumptionRegister": [
+  {
+   "assumption": "Custom scope is the main cause of falling margins.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "unvalidated"
+  },
+  {
+   "assumption": "Reusable assets are not being captured.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "unvalidated"
+  },
+  {
+   "assumption": "Sales incentives reward bespoke deals, shaping the pipeline the wrong way.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "unvalidated"
+  },
+  {
+   "assumption": "Three paid design partners will accept a fixed boundary.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "unvalidated"
+  },
+  {
+   "assumption": "Target margin is achievable at lower delivery variability.",
+   "label": "user_assumption",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "importance": "important",
+   "evidenceState": "plausible"
+  }
+ ],
+ "reverseEconomics": {
+  "mustBeTrueForValue": [
+   "Three paid design partners accept the fixed boundary. (user_assumption)",
+   "Recurring revenue increases. (user_fact)",
+   "Service margin improves. (user_fact)"
+  ],
+  "mustBeTrueForCost": [
+   "No additional senior architects are required for two quarters. (user_fact)",
+   "Delivery variability is reduced without extra cost. (user_assumption)"
+  ],
+  "statements": [
+   {
+    "text": "If the fixed boundary does not attract design partners, the productization fails. (ai_inference)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "If margin does not improve with lower variability, the strategy is not viable. (ai_inference)",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   }
+  ]
+ },
+ "evidenceGates": [
+  {
+   "owner": "Services Director",
+   "test": "Number of paid design partners signed against fixed boundary",
+   "threshold": "At least 2 signed within 90 days",
+   "reviewDate": "End of Q1 2027",
+   "decisionRule": "adjust",
+   "measure": "Count of signed contracts"
+  },
+  {
+   "owner": "Finance",
+   "test": "Service margin on design partner projects",
+   "threshold": "Margin at or above target",
+   "reviewDate": "End of Q1 2027",
+   "decisionRule": "adjust",
+   "measure": "Service margin percentage"
+  }
+ ],
+ "actionPortfolio": [
+  {
+   "action": "Define fixed service boundary for one segment",
+   "owner": "Services Director",
+   "milestone": "Boundary documented and approved",
+   "supportsPriority": "Productize one segment"
+  },
+  {
+   "action": "Identify and approach three potential design partners",
+   "owner": "Sales Lead",
+   "milestone": "Three proposals sent",
+   "supportsPriority": "Validate with design partners"
+  },
+  {
+   "action": "Track delivery variability and margin on design partner projects",
+   "owner": "Finance",
+   "milestone": "Weekly reports",
+   "supportsPriority": "Improve margin"
+  },
+  {
+   "action": "Review sales incentive structure",
+   "owner": "Sales Director",
+   "milestone": "Incentive alignment proposal",
+   "supportsPriority": "Align pipeline"
+  }
+ ],
+ "stopDefer": [
+  {
+   "text": "Defer entering new verticals this half. (human_decision)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  {
+   "text": "Defer expanding partner-led delivery this half. (human_decision)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  }
+ ],
+ "executionMeasures": [
+  {
+   "measure": "Needs validation.",
+   "kind": "outcome",
+   "dataSource": "CRM",
+   "owner": "Sales Operations",
+   "cadence": "Monthly"
+  },
+  {
+   "measure": "Needs validation.",
+   "kind": "outcome",
+   "dataSource": "Project tracking",
+   "owner": "Finance",
+   "cadence": "Weekly"
+  }
+ ],
+ "riskReviews": [
+  {
+   "risk": "Needs validation.",
+   "area": "regulatory",
+   "requiresHumanApproval": true,
+   "reviewOwner": "Services Director",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null
+  },
+  {
+   "risk": "Needs validation.",
+   "area": "regulatory",
+   "requiresHumanApproval": true,
+   "reviewOwner": "Finance Director",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null
+  }
+ ],
+ "decisionRecord": {
+  "confirmedDecision": {
+   "text": "Productize one segment with a fixed service boundary, validated by three paid design partners within 90 days. (human_decision)",
+   "label": "ai_inference",
+   "sourceResponseId": null,
+   "sourceStage": null,
+   "note": "Needs validation"
+  },
+  "pendingOwnerDecisions": [
+   "Selection of specific segment to productize (human_decision)",
+   "Definition of fixed service boundary (human_decision)"
+  ],
+  "revisitTriggers": [
+   "Fewer than two design partners sign within 90 days (user_fact)",
+   "Margin does not improve (ai_inference)"
+  ],
+  "reviewCadence": "Quarterly",
+  "approvedBy": [
+   "Services Director"
+  ]
+ },
+ "readinessSnapshot": [
+  {
+   "dimension": "diagnosis_clarity",
+   "level": "amber",
+   "explanation": "Needs validation."
+  },
+  {
+   "dimension": "choice_clarity",
+   "level": "amber",
+   "explanation": "Needs validation."
+  },
+  {
+   "dimension": "evidence_readiness",
+   "level": "amber",
+   "explanation": "Needs validation."
+  },
+  {
+   "dimension": "execution_ownership",
+   "level": "amber",
+   "explanation": "Needs validation."
+  },
+  {
+   "dimension": "risk_governance",
+   "level": "amber",
+   "explanation": "Needs validation."
+  }
+ ],
+ "limitations": [
+  "Quantified margin decline and revenue growth figures are missing.",
+  "Evidence that custom scope is the primary driver versus other factors is missing.",
+  "Validation that three design partners will accept a fixed boundary is missing.",
+  "Data on sales incentive structures and their impact on deal shaping is missing.",
+  "Historical service margin and repeat booking rates are missing."
+ ],
+ "stopDeferExplicit": true
+}

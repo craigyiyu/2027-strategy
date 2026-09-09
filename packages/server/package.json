@@ -16,7 +16,8 @@
     "test:integration": "vitest run test/integration",
     "test:e2e": "playwright test",
     "eval:live": "tsx eval/live-eval.ts",
-    "eval:rubric": "tsx eval/rubric-triage.ts"
+    "eval:rubric": "tsx eval/rubric-triage.ts",
+    "eval:followups": "tsx eval/followup-evidence.ts"
   },
   "dependencies": {
     "@2027strategy/shared": "workspace:*",

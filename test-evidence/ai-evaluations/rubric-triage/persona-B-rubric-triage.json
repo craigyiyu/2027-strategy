@@ -1,0 +1,40 @@
+{
+  "persona": "B",
+  "judge": {
+    "scores": {
+      "Diagnosis specificity": 2,
+      "Crux quality": 3,
+      "Alternative quality": 2,
+      "Choice clarity": 3,
+      "Evidence traceability": 1,
+      "Assumption quality": 2,
+      "Action coherence": 3,
+      "Execution testability": 2,
+      "Governance integrity": 2
+    },
+    "justifications": {
+      "Diagnosis specificity": "Symptoms are vague (e.g., 'falling margin') without quantified data. Candidate diagnoses are plausible but not validated, and the confirmed diagnosis is an inference lacking evidence.",
+      "Crux quality": "The crux is clear and testable, but it is an inference and lacks specificity on how the fixed boundary will be defined or which segment is targeted.",
+      "Alternative quality": "Alternatives are listed but lack depth, tradeoffs are empty, and no evaluation criteria are provided to compare them.",
+      "Choice clarity": "The decision is stated, but key parameters (segment selection, boundary definition) are pending. The choice contract is incomplete with many 'Needs validation' labels.",
+      "Evidence traceability": "All evidence items are labeled 'ai_inference' with 'Needs validation', and no sourceResponseId is provided. No statements are traceable to verifiable sources.",
+      "Assumption quality": "Assumptions are identified but mostly unvalidated, with no plan for validation. The assumption register lacks evidence and prioritization.",
+      "Action coherence": "Actions are listed but lack clear sequencing, dependencies, and resource allocation. Some actions are vague (e.g., 'Review sales incentive structure').",
+      "Execution testability": "Evidence gates have thresholds, but measures are vague ('Needs validation') and data sources are not specified. Execution measures are incomplete.",
+      "Governance integrity": "Risk reviews are placeholders with 'Needs validation'. Decision record is incomplete, and approval is not clearly documented. No explicit human approval for high-risk items."
+    },
+    "fabricated_claims": 0,
+    "traceable_statements": 0,
+    "material_statements_sampled": 10,
+    "missing_unknowns_handled": false,
+    "max_priorities": 1,
+    "has_stop_defer": true,
+    "hard_risks_require_human": true,
+    "notes": "The report is largely unvalidated, with many items marked 'Needs validation'. It lacks quantitative evidence and clear traceability. Scores reflect the need for substantial improvement in evidence and specificity."
+  },
+  "reportSummary": {
+    "maxPriorities": 4,
+    "evidenceStatements": 6,
+    "riskReviews": 2
+  }
+}

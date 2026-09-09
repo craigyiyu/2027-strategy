@@ -3,11 +3,11 @@
  "language": "en",
  "modelId": "deepseek-chat",
  "promptVersion": "2026-09-09.1",
- "generatedAt": "2026-09-09T09:49:18.062Z",
- "strategyThesis": "In 2027, build a second leadership layer to remove founder dependency in delivery and client expansion, deciding by end of January between external hire, internal promotion, or scope reduction.",
+ "generatedAt": "2026-09-09T09:56:09.952Z",
+ "strategyThesis": "In 2027, build a second leadership layer to remove founder dependency in delivery and client expansion, enabling scalable growth without expanding service scope or raising prices.",
  "decisionBrief": {
   "decision": {
-   "text": "Whether to remain delivery-led or build a second leadership layer in 2027. Decision owner: founder; decided by end of January. (user_fact)",
+   "text": "Build a second leadership layer by end of January 2027, deciding between external hire, internal promotion, or scope reduction.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -29,18 +29,18 @@
     "note": "Needs validation"
    }
   ],
-  "deadline": "End of January 2027",
-  "approver": "Founder (human_decision)",
+  "deadline": "2027-01-31",
+  "approver": "Founder",
   "hardConstraints": [
    {
-    "text": "One senior hire budget is available (user_fact)",
+    "text": "One senior hire budget available",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "No expansion into adjacent services or raising prices this year (user_fact)",
+    "text": "No expansion into adjacent services or price increases in 2027",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
@@ -50,70 +50,70 @@
  },
  "evidenceBase": [
   {
-   "text": "Founder time is the growth bottleneck. (user_fact)",
+   "text": "Founder time is the growth bottleneck.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "Two key accounts need more senior attention. (user_fact)",
+   "text": "Two key accounts need more senior attention.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "Decision owner is the founder. (user_fact)",
+   "text": "One senior hire budget is available.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "Decision deadline is end of January. (user_fact)",
+   "text": "Decision owner is the founder.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "One senior hire budget is available. (user_fact)",
+   "text": "Decision deadline is end of January.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "Hiring one senior leader will unlock client expansion. (user_assumption)",
+   "text": "Hiring one senior leader will unlock client expansion.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "An internal candidate can grow into the role within 6 months. (user_assumption)",
+   "text": "An internal candidate can grow into the role within 6 months.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "Clients accept a new primary contact. (user_assumption)",
+   "text": "Clients accept a new primary contact.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "By Q4 2027, two leaders will own delivery and client expansion without constant founder intervention. (user_assumption)",
+   "text": "By Q4 2027, two leaders will own delivery and client expansion without constant founder intervention.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "Progress can be shown by decision logs and freed founder hours. (user_assumption)",
+   "text": "Progress can be shown by decision logs and freed founder hours.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -123,14 +123,14 @@
  "challengeDiagnosis": {
   "symptoms": [
    {
-    "text": "Founder time is the growth bottleneck. (user_fact)",
+    "text": "Founder time is the growth bottleneck.",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "Two key accounts need more senior attention. (user_fact)",
+    "text": "Two key accounts need more senior attention.",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
@@ -141,21 +141,25 @@
    {
     "diagnosis": "Single-person dependency in delivery and sales.",
     "support": [
-     "Founder time is the growth bottleneck. (user_fact)",
-     "Two key accounts need more senior attention. (user_fact)"
+     "Founder time is the growth bottleneck.",
+     "Two key accounts need more senior attention."
     ],
-    "counter_evidence": []
+    "counter_evidence": [
+     "Alternative: scope is too wide, so delegation fails regardless of who is hired."
+    ]
    },
    {
     "diagnosis": "Scope is too wide, so delegation fails regardless of who is hired.",
     "support": [
-     "Option C: reduce service scope before delegating. (user_assumption)"
+     "Option C: reduce service scope before delegating is considered."
     ],
-    "counter_evidence": []
+    "counter_evidence": [
+     "Leading explanation is single-person dependency."
+    ]
    }
   ],
   "confirmedDiagnosis": {
-   "text": "Single-person dependency in delivery and sales is the leading explanation, but scope too wide remains a viable alternative. (ai_inference based on user_assumption)",
+   "text": "Single-person dependency in delivery and sales is the leading explanation, but scope too wide remains a viable alternative.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -164,7 +168,7 @@
  },
  "crux": {
   "cruxStatement": {
-   "text": "Is the bottleneck founder dependency or excessive scope? (ai_inference based on user_assumption)",
+   "text": "Is the bottleneck founder dependency or excessive scope?",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -172,14 +176,21 @@
   },
   "whyNow": [
    {
-    "text": "Decision deadline is end of January. (user_fact)",
+    "text": "Founder time is the growth bottleneck.",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "Founder time is the growth bottleneck. (user_fact)",
+    "text": "Two key accounts need more senior attention.",
+    "label": "ai_inference",
+    "sourceResponseId": null,
+    "sourceStage": null,
+    "note": "Needs validation"
+   },
+   {
+    "text": "Decision deadline is end of January.",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
@@ -187,9 +198,9 @@
    }
   ],
   "alternativesConsidered": [
-   "External hire (user_assumption)",
-   "Internal promotion and coaching (user_assumption)",
-   "Reduce service scope before delegating (user_assumption)"
+   "External hire",
+   "Internal promotion",
+   "Reduce service scope before delegating"
   ]
  },
  "strategicAlternatives": [
@@ -201,37 +212,37 @@
    "tradeoffs": []
   },
   {
-   "name": "Internal promotion and coaching",
+   "name": "Internal promotion",
    "guidingPolicy": "Needs validation.",
-   "whereToPlay": "Promote an internal candidate and provide coaching.",
-   "howToWin": "Leverage existing culture and knowledge, lower cost.",
+   "whereToPlay": "Promote and coach an internal candidate into the leadership role.",
+   "howToWin": "Leverage existing culture and client relationships, lower cost.",
    "tradeoffs": []
   },
   {
-   "name": "Reduce service scope before delegating",
+   "name": "Reduce service scope",
    "guidingPolicy": "Needs validation.",
-   "whereToPlay": "Narrow the service offering to make delegation more feasible.",
-   "howToWin": "Focus on core strengths, reduce complexity.",
+   "whereToPlay": "Narrow service offerings to focus on core strengths before delegating.",
+   "howToWin": "Simplify operations, making delegation more feasible.",
    "tradeoffs": []
   }
  ],
  "choiceContract": {
   "winningAspiration": {
-   "text": "By Q4 2027, two leaders own delivery and client expansion without constant founder intervention, shown by decision logs and freed founder hours. (user_assumption)",
+   "text": "By Q4 2027, two leaders own delivery and client expansion without constant founder intervention, shown by decision logs and freed founder hours.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   "whereToPlay": {
-   "text": "Focus on existing key accounts and core delivery services. (ai_inference)",
+   "text": "Focus on existing core services and key accounts; no expansion into adjacent services or price increases in 2027.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   "howToWin": {
-   "text": "Delegate two accounts with weekly decision logs and agreed escalation thresholds. (user_fact)",
+   "text": "Build a second leadership layer through external hire or internal promotion, with clear delegation and escalation thresholds.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -239,21 +250,21 @@
   },
   "requiredCapabilities": [
    {
-    "text": "Leadership and delegation skills (ai_inference)",
+    "text": "Leadership and delegation skills",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "Client relationship management (ai_inference)",
+    "text": "Client relationship management",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "Decision-making and escalation handling (ai_inference)",
+    "text": "Operational oversight",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
@@ -262,21 +273,21 @@
   ],
   "managementSystems": [
    {
-    "text": "Weekly decision logs (user_fact)",
+    "text": "Weekly decision logs",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "Escalation thresholds (user_fact)",
+    "text": "Escalation thresholds",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "Monthly review by founder (user_fact)",
+    "text": "Monthly review meetings",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
@@ -286,7 +297,7 @@
  },
  "assumptionRegister": [
   {
-   "assumption": "Needs validation.",
+   "assumption": "Hiring one senior leader will unlock client expansion.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -294,7 +305,7 @@
    "evidenceState": "unvalidated"
   },
   {
-   "assumption": "Needs validation.",
+   "assumption": "An internal candidate can grow into the role within 6 months.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -302,7 +313,7 @@
    "evidenceState": "unvalidated"
   },
   {
-   "assumption": "Needs validation.",
+   "assumption": "Clients accept a new primary contact.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -310,7 +321,7 @@
    "evidenceState": "unvalidated"
   },
   {
-   "assumption": "Needs validation.",
+   "assumption": "By Q4 2027, two leaders will own delivery and client expansion without constant founder intervention.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -318,47 +329,7 @@
    "evidenceState": "unvalidated"
   },
   {
-   "assumption": "Needs validation.",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Needs validation.",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Needs validation.",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Needs validation.",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Needs validation.",
-   "label": "ai_inference",
-   "sourceResponseId": null,
-   "sourceStage": null,
-   "importance": "important",
-   "evidenceState": "unvalidated"
-  },
-  {
-   "assumption": "Needs validation.",
+   "assumption": "Progress can be shown by decision logs and freed founder hours.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -368,23 +339,23 @@
  ],
  "reverseEconomics": {
   "mustBeTrueForValue": [
-   "Clients accept a new primary contact. (user_assumption)",
-   "Two leaders can effectively manage delivery and client expansion. (ai_inference)"
+   "Clients accept a new primary contact.",
+   "Senior leader can effectively manage client relationships."
   ],
   "mustBeTrueForCost": [
-   "One senior hire budget is available. (user_fact)",
-   "Internal promotion costs less than external hire. (ai_inference)"
+   "Senior hire budget is sufficient.",
+   "Internal promotion is cost-effective."
   ],
   "statements": [
    {
-    "text": "If clients do not accept a new primary contact, value will not materialize. (ai_inference)",
+    "text": "If clients do not accept a new primary contact, value will not materialize.",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
     "note": "Needs validation"
    },
    {
-    "text": "If the internal candidate cannot grow within 6 months, cost may increase. (ai_inference)",
+    "text": "If the senior hire budget is insufficient, the external hire option is not viable.",
     "label": "ai_inference",
     "sourceResponseId": null,
     "sourceStage": null,
@@ -395,46 +366,62 @@
  "evidenceGates": [
   {
    "owner": "Founder",
-   "test": "Delegation of two accounts with weekly decision logs and agreed escalation thresholds.",
-   "threshold": "Escalation frequency falls or remains stable.",
+   "test": "Survey or direct feedback from two key accounts after introducing new leader",
+   "threshold": "Both accounts express comfort with new primary contact",
    "reviewDate": "2027-04-30",
    "decisionRule": "adjust",
-   "measure": "Escalation frequency"
+   "measure": "Client feedback score"
+  },
+  {
+   "owner": "Founder",
+   "test": "Assess internal candidate's leadership capabilities through trial projects",
+   "threshold": "Candidate demonstrates ability to handle delivery and client expansion independently",
+   "reviewDate": "2027-04-30",
+   "decisionRule": "adjust",
+   "measure": "Competency assessment"
+  },
+  {
+   "owner": "Founder",
+   "test": "Track number of escalations from delegated accounts",
+   "threshold": "Escalation frequency decreases by 50% from baseline",
+   "reviewDate": "2027-04-30",
+   "decisionRule": "adjust",
+   "measure": "Escalation count per week"
   }
  ],
  "actionPortfolio": [
   {
-   "action": "Decide between external hire, internal promotion, or scope reduction by end of January.",
+   "action": "Decide on leadership layer approach by end of January",
    "owner": "Founder",
-   "milestone": "Decision made and announced",
+   "milestone": "Decision made and communicated",
    "supportsPriority": "Build second leadership layer"
   },
   {
-   "action": "If external hire: initiate recruitment process.",
+   "action": "If external hire: initiate recruitment process",
    "owner": "Founder",
-   "milestone": "Candidate identified",
+   "milestone": "Job description finalized and posted",
    "supportsPriority": "Build second leadership layer"
   },
   {
-   "action": "If internal promotion: start coaching and development plan.",
+   "action": "If internal promotion: start coaching and development plan",
    "owner": "Founder",
-   "milestone": "Development plan in place",
+   "milestone": "Development plan agreed with candidate",
    "supportsPriority": "Build second leadership layer"
   },
   {
-   "action": "If scope reduction: define new service scope and communicate to clients.",
+   "action": "Delegate two accounts to new leader with weekly decision logs",
    "owner": "Founder",
-   "milestone": "Scope defined and communicated",
+   "milestone": "Delegation plan executed",
    "supportsPriority": "Build second leadership layer"
   },
   {
-   "action": "Delegate two accounts with weekly decision logs and escalation thresholds.",
+   "action": "Establish escalation thresholds and review cadence",
    "owner": "Founder",
-   "milestone": "Delegation in place",
+   "milestone": "Thresholds documented and communicated",
    "supportsPriority": "Build second leadership layer"
   },
   {
-   "action": "Review delegation progress monthly.",
+   "action": "Monitor progress monthly and adjust scope if needed",
    "owner": "Founder",
    "milestone": "Monthly review completed",
    "supportsPriority": "Build second leadership layer"
@@ -442,14 +429,14 @@
  ],
  "stopDefer": [
   {
-   "text": "Expanding into adjacent services this year. (user_fact)",
+   "text": "Defer expansion into adjacent services in 2027.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   {
-   "text": "Raising prices this year. (user_fact)",
+   "text": "Defer raising prices in 2027.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
@@ -458,23 +445,16 @@
  ],
  "executionMeasures": [
   {
-   "measure": "Two leaders own delivery and client expansion without constant founder intervention by Q4 2027.",
+   "measure": "Needs validation.",
    "kind": "outcome",
-   "dataSource": "Decision logs and founder time tracking",
-   "owner": "Founder",
-   "cadence": "Quarterly"
-  },
-  {
-   "measure": "Escalation frequency on delegated accounts.",
-   "kind": "outcome",
-   "dataSource": "Weekly decision logs",
+   "dataSource": "Decision logs",
    "owner": "Founder",
    "cadence": "Weekly"
   },
   {
-   "measure": "Client satisfaction with new primary contact.",
+   "measure": "Needs validation.",
    "kind": "outcome",
-   "dataSource": "Client feedback",
+   "dataSource": "Time tracking",
    "owner": "Founder",
    "cadence": "Monthly"
   }
@@ -510,17 +490,19 @@
  ],
  "decisionRecord": {
   "confirmedDecision": {
-   "text": "Build a second leadership layer by end of January 2027, deciding between external hire, internal promotion, or scope reduction. (human_decision)",
+   "text": "Build a second leadership layer by end of January 2027, deciding between external hire, internal promotion, or scope reduction.",
    "label": "ai_inference",
    "sourceResponseId": null,
    "sourceStage": null,
    "note": "Needs validation"
   },
   "pendingOwnerDecisions": [
-   "Choice of external hire vs internal promotion vs scope reduction (human_decision)"
+   "External hire vs internal promotion vs scope reduction"
   ],
   "revisitTriggers": [
-   "If escalation frequency does not fall within 90 days, revisit scope. (user_fact)"
+   "If client acceptance fails",
+   "If internal candidate not ready",
+   "If escalation frequency does not decrease"
   ],
   "reviewCadence": "Monthly",
   "approvedBy": [
@@ -555,10 +537,9 @@
   }
  ],
  "limitations": [
-  "Market data and financials not validated.",
-  "Client acceptance unknown.",
-  "Internal candidate capability unvalidated.",
-  "No external market benchmarks used."
+  "Financial details on senior hire budget and cost implications not provided.",
+  "Data on escalation frequency or decision logs not available.",
+  "Client acceptance not yet validated."
  ],
  "stopDeferExplicit": true
 }

@@ -1,0 +1,82 @@
+{
+  "provider": "live",
+  "results": [
+    {
+      "scenario": "AI-001",
+      "stage": "Q1",
+      "expectedReason": "missing decision owner/scope → asks who owns / by when",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "What specific decision must be made, and by what date?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-002",
+      "stage": "Q3",
+      "expectedReason": "activity-only outcome → asks observable result",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "What specific, measurable outcome would demonstrate that AI has been successfully implemented across the company by the end of 2027?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-003",
+      "stage": "Q4",
+      "expectedReason": "symptom stated as cause → mechanism + alternative",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "What specific aspects of the customer experience are failing, and what evidence do you have that these are the root cause rather than a symptom?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-004",
+      "stage": "Q5",
+      "expectedReason": "eight equal priorities → force pivotal + exclusion",
+      "quality": "too_many_priorities",
+      "needsFollowup": true,
+      "followup": "If you had to choose just one of these eight to focus on next year, which would it be and why?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-005",
+      "stage": "Q6",
+      "expectedReason": "task variants presented as options → require different guiding policy",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "For each of the three phases (AI enablement, AI adoption, centre of excellence), what specific market or customer segment will you target, what unique capability will you build, and what will you deliberately stop doing or deprioritize to focus?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-006",
+      "stage": "Q7",
+      "expectedReason": "claim without evidence → ask consequential assumptions/evidence",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "What specific capabilities, economic thresholds, and assumptions must hold for this option to succeed?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-007",
+      "stage": "Q8",
+      "expectedReason": "action without decision threshold → ask continue/adjust/pause/stop condition",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "What specific metric or outcome would define success for the AI pilot, and what threshold would trigger a pivot or stop?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    }
+  ]
+}

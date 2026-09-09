@@ -57,7 +57,7 @@ export class LiveProvider {
         messages,
         temperature: 0.0, // deterministic for assess/report stability
         response_format: { type: 'json_object' },
-        max_tokens: 4000,
+        max_tokens: 8000,
       }),
       signal: AbortSignal.timeout(this.opts.timeoutMs),
     });
@@ -241,20 +241,32 @@ export function normalizeAssess(v: unknown): unknown {
 
 const VALID_LABELS = new Set(['user_fact','user_assumption','ai_inference','needs_validation','human_decision']);
 
+/** Recover a provenance label appended as a suffix like “ (user_fact)”. */
+function splitTrailingLabel(text: string): { text: string; label: string | null } {
+  const m = /\s*\((user_fact|user_assumption|ai_inference|needs_validation|human_decision)\)\s*$/i.exec(text);
+  if (m) return { text: text.slice(0, m.index).trim(), label: (m[1] ?? '').toLowerCase() };
+  return { text, label: null };
+}
+
 /** Coerce one provenance statement from whatever the model returned. */
 function asStatement(v: unknown): { text: string; label: string; sourceStage: string | null; sourceResponseId: string | null; note: string | null } | null {
   if (typeof v === 'string') {
-    return v.trim() ? { text: v.trim(), label: 'ai_inference', sourceStage: null, sourceResponseId: null, note: 'Needs validation' } : null;
+    const { text, label } = splitTrailingLabel(v.trim());
+    if (!text) return null;
+    return { text, label: label ?? 'ai_inference', sourceStage: null, sourceResponseId: null, note: null };
   }
   if (v && typeof v === 'object') {
     const o = v as Record<string, unknown>;
-    const text = typeof o.text === 'string' ? o.text : typeof o.statement === 'string' ? o.statement : typeof o.content === 'string' ? o.content : '';
+    let text = typeof o.text === 'string' ? o.text : typeof o.statement === 'string' ? o.statement : typeof o.content === 'string' ? o.content : '';
     const rawLabel = typeof o.label === 'string' ? o.label : typeof o.type === 'string' ? o.type : 'ai_inference';
-    const label = VALID_LABELS.has(rawLabel) ? rawLabel : 'ai_inference';
     const src = typeof o.sourceStage === 'string' ? o.sourceStage : typeof o.source_stage === 'string' ? o.source_stage : null;
-    return text.trim()
-      ? { text: text.trim(), label, sourceStage: src, sourceResponseId: src, note: typeof o.note === 'string' ? o.note : (label === 'ai_inference' ? 'AI inference — needs validation' : null) }
-      : null;
+    const fromText = splitTrailingLabel(text);
+    text = fromText.text || text;
+    const label = (fromText.label ?? rawLabel ?? 'ai_inference') as string;
+    const valid = VALID_LABELS.has(label) ? label : 'ai_inference';
+    const note = typeof o.note === 'string' ? o.note : null;
+    if (!text.trim()) return null;
+    return { text: text.trim(), label: valid, sourceStage: src, sourceResponseId: src, note: note ?? (valid === 'ai_inference' ? 'AI inference — needs validation' : null) };
   }
   return null;
 }
