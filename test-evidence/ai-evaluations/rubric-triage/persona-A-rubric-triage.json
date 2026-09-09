@@ -6,35 +6,35 @@
       "Crux quality": 3,
       "Alternative quality": 3,
       "Choice clarity": 3,
-      "Evidence traceability": 3,
+      "Evidence traceability": 4,
       "Assumption quality": 3,
       "Action coherence": 3,
       "Execution testability": 3,
       "Governance integrity": 3
     },
     "justifications": {
-      "Diagnosis specificity": "Symptoms are specific (fragmented journeys, delayed reporting), but candidate diagnoses are broad and lack detailed causal analysis. Confirmed diagnosis is an inference without validation.",
-      "Crux quality": "Crux statement is clear and decision-focused, but whyNow is thin and alternatives are not deeply analyzed.",
-      "Alternative quality": "Three alternatives are listed with brief descriptions, but tradeoffs are empty and no comparative analysis is provided.",
-      "Choice clarity": "Decision is clearly stated, but the report does not recommend a preferred option, leaving the choice open. Criteria for selection are not explicit.",
-      "Evidence traceability": "All evidence is labeled as 'needs validation' and lacks source citations. No external data or benchmarks are provided.",
-      "Assumption quality": "Assumptions are listed but mostly unvalidated, with no plan for validation. Critical assumptions like 'two use cases demonstrate value in 90 days' are unvalidated.",
-      "Action coherence": "Actions are logically sequenced but lack detail on dependencies and resource allocation. They are not explicitly tied to a chosen alternative.",
-      "Execution testability": "Measures are defined with thresholds and owners, but data sources are vague and some measures are not directly tied to the decision.",
-      "Governance integrity": "Risk reviews are placeholder 'Needs validation' and lack specific risks. Human approval is required, but no concrete risks are identified."
+      "Diagnosis specificity": "Symptoms are specific (fragmented journeys, delayed reporting), but candidate diagnoses lack supporting evidence and the confirmed diagnosis is a single statement without detailed analysis.",
+      "Crux quality": "Crux statement is clear and captures key tensions, but whyNow is brief and alternatives are listed without deep analysis.",
+      "Alternative quality": "Three alternatives are described with tradeoffs, but guiding policies are 'Needs validation' and no detailed comparison or evaluation is provided.",
+      "Choice clarity": "Decision is explicit with conditions, but the choice contract lacks specificity on how to win and required capabilities are vague.",
+      "Evidence traceability": "Most statements are labeled with source IDs and stages, enabling traceability. However, some AI inferences lack sources.",
+      "Assumption quality": "Assumptions are listed but many are unvalidated and lack evidence or reasoning. No prioritization or mitigation plans.",
+      "Action coherence": "Actions align with the decision but are high-level and lack dependencies, sequencing, and resource allocation.",
+      "Execution testability": "Measures are defined but lack baselines and targets. Evidence gate has clear test and threshold but no data source for measure.",
+      "Governance integrity": "Risk reviews are placeholders with 'Needs validation' and no specific risks. Decision record is present but lacks detailed governance process."
     },
     "fabricated_claims": 0,
-    "traceable_statements": 0,
-    "material_statements_sampled": 0,
+    "traceable_statements": 15,
+    "material_statements_sampled": 15,
     "missing_unknowns_handled": true,
     "max_priorities": 1,
     "has_stop_defer": true,
     "hard_risks_require_human": true,
-    "notes": "Report is a draft with many placeholders and unvalidated assumptions. It provides a structured framework but lacks depth and evidence. Scores reflect adequate but not excellent performance."
+    "notes": "Report is a solid draft but lacks depth in several areas. Evidence traceability is strong, but many key elements are marked 'Needs validation' or 'unvalidated', reducing scores. No fabricated claims detected."
   },
   "reportSummary": {
-    "maxPriorities": 5,
-    "evidenceStatements": 9,
-    "riskReviews": 3
+    "maxPriorities": 4,
+    "evidenceStatements": 15,
+    "riskReviews": 4
   }
 }

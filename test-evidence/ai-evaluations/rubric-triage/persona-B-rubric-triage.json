@@ -6,35 +6,35 @@
       "Crux quality": 3,
       "Alternative quality": 2,
       "Choice clarity": 3,
-      "Evidence traceability": 1,
+      "Evidence traceability": 2,
       "Assumption quality": 2,
       "Action coherence": 3,
-      "Execution testability": 2,
+      "Execution testability": 3,
       "Governance integrity": 2
     },
     "justifications": {
-      "Diagnosis specificity": "Symptoms are vague (e.g., 'falling margin') without quantified data. Candidate diagnoses are plausible but not validated, and the confirmed diagnosis is an inference lacking evidence.",
-      "Crux quality": "The crux is clear and testable, but it is an inference and lacks specificity on how the fixed boundary will be defined or which segment is targeted.",
-      "Alternative quality": "Alternatives are listed but lack depth, tradeoffs are empty, and no evaluation criteria are provided to compare them.",
-      "Choice clarity": "The decision is stated, but key parameters (segment selection, boundary definition) are pending. The choice contract is incomplete with many 'Needs validation' labels.",
-      "Evidence traceability": "All evidence items are labeled 'ai_inference' with 'Needs validation', and no sourceResponseId is provided. No statements are traceable to verifiable sources.",
-      "Assumption quality": "Assumptions are identified but mostly unvalidated, with no plan for validation. The assumption register lacks evidence and prioritization.",
-      "Action coherence": "Actions are listed but lack clear sequencing, dependencies, and resource allocation. Some actions are vague (e.g., 'Review sales incentive structure').",
-      "Execution testability": "Evidence gates have thresholds, but measures are vague ('Needs validation') and data sources are not specified. Execution measures are incomplete.",
-      "Governance integrity": "Risk reviews are placeholders with 'Needs validation'. Decision record is incomplete, and approval is not clearly documented. No explicit human approval for high-risk items."
+      "Diagnosis specificity": "The diagnosis is vague, lacking specific data or validation. It mentions custom scope and asset capture but does not quantify or isolate causes.",
+      "Crux quality": "The crux is clear but not fully validated; it focuses on design partner acceptance but omits other critical uncertainties like margin achievability.",
+      "Alternative quality": "Alternatives are described at a high level with generic tradeoffs, lacking depth and specific evaluation criteria.",
+      "Choice clarity": "The choice is explicit but lacks specificity on segment selection and target margin, reducing clarity.",
+      "Evidence traceability": "Many statements are labeled as user assumptions or AI inferences without source citations, and some evidence lacks clear traceability.",
+      "Assumption quality": "Key assumptions are unvalidated and some are labeled 'plausible' without evidence, indicating weak assumption management.",
+      "Action coherence": "Actions are broadly aligned with the strategy but lack specific dates and clear dependencies, reducing coherence.",
+      "Execution testability": "Measures are defined but some thresholds are missing (e.g., margin improvement percentage), limiting testability.",
+      "Governance integrity": "Risk reviews are placeholder 'Needs validation' and lack specific risks, undermining governance integrity."
     },
     "fabricated_claims": 0,
-    "traceable_statements": 0,
-    "material_statements_sampled": 10,
+    "traceable_statements": 10,
+    "material_statements_sampled": 20,
     "missing_unknowns_handled": false,
     "max_priorities": 1,
     "has_stop_defer": true,
     "hard_risks_require_human": true,
-    "notes": "The report is largely unvalidated, with many items marked 'Needs validation'. It lacks quantitative evidence and clear traceability. Scores reflect the need for substantial improvement in evidence and specificity."
+    "notes": "The report has a clear decision but suffers from lack of specificity and validation. Many critical elements are marked 'Needs validation' or 'unvalidated', indicating incomplete analysis. The report would benefit from more concrete data and defined metrics."
   },
   "reportSummary": {
-    "maxPriorities": 4,
-    "evidenceStatements": 6,
-    "riskReviews": 2
+    "maxPriorities": 5,
+    "evidenceStatements": 10,
+    "riskReviews": 3
   }
 }

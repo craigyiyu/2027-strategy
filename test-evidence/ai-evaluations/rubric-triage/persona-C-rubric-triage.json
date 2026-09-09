@@ -3,38 +3,38 @@
   "judge": {
     "scores": {
       "Diagnosis specificity": 2,
-      "Crux quality": 2,
+      "Crux quality": 3,
       "Alternative quality": 2,
-      "Choice clarity": 2,
-      "Evidence traceability": 1,
+      "Choice clarity": 3,
+      "Evidence traceability": 3,
       "Assumption quality": 2,
-      "Action coherence": 2,
-      "Execution testability": 2,
+      "Action coherence": 3,
+      "Execution testability": 3,
       "Governance integrity": 2
     },
     "justifications": {
-      "Diagnosis specificity": "Symptoms are generic (founder bottleneck, two accounts need attention) and lack quantitative detail. Candidate diagnoses are plausible but not deeply analyzed; confirmed diagnosis is tentative and not specific about scope or dependency nature.",
-      "Crux quality": "Crux is a binary question (dependency vs scope) but lacks nuance and fails to articulate why it is the pivotal uncertainty. Why-now reasons are repetitive and not compelling.",
-      "Alternative quality": "Three alternatives are listed but descriptions are superficial, with no tradeoffs or comparative analysis. Guiding policies are placeholder 'Needs validation.'",
-      "Choice clarity": "Decision is clear but not a real choice; it is a meta-decision (hire vs promote vs reduce scope) without criteria or recommendation. Winning aspiration is vague and not tied to a specific alternative.",
-      "Evidence traceability": "All evidence is labeled 'ai_inference' with no sources, and many statements are 'Needs validation.' No traceable data or citations.",
-      "Assumption quality": "Assumptions are important but unvalidated, with no plan to test them. Some are outcome statements rather than assumptions.",
-      "Action coherence": "Actions are logical but generic and not sequenced or prioritized. They do not clearly support a specific alternative or address the crux.",
-      "Execution testability": "Measures are vague ('Needs validation') and lack baselines or targets. Evidence gates have thresholds but are not tied to specific actions or decisions.",
-      "Governance integrity": "Risk reviews are placeholders with 'Needs validation' and no specific risks. Stop/defer is explicit but limited. No evidence of human oversight beyond founder."
+      "Diagnosis specificity": "Symptoms are vague ('founder time is bottleneck') and confirmed diagnosis is not resolved; alternative diagnosis lacks support.",
+      "Crux quality": "Crux is clearly stated but lacks depth and evidence; alternatives considered are not integrated.",
+      "Alternative quality": "Alternatives are listed but lack tradeoffs and validation; no comparative analysis.",
+      "Choice clarity": "Decision is clear but pending owner decisions and criteria are not specified.",
+      "Evidence traceability": "Most statements are user facts or AI inferences with source IDs, but many lack sourceResponseId.",
+      "Assumption quality": "Assumptions are unvalidated and lack importance/impact analysis; no mitigation plans.",
+      "Action coherence": "Actions align with decision but lack sequencing and dependencies.",
+      "Execution testability": "Measures are defined but lack baselines and specific targets.",
+      "Governance integrity": "Risk reviews are placeholders ('Needs validation') and lack specificity; human approval noted but not detailed."
     },
     "fabricated_claims": 0,
-    "traceable_statements": 0,
-    "material_statements_sampled": 10,
-    "missing_unknowns_handled": false,
+    "traceable_statements": 12,
+    "material_statements_sampled": 20,
+    "missing_unknowns_handled": true,
     "max_priorities": 1,
     "has_stop_defer": true,
     "hard_risks_require_human": true,
-    "notes": "Report is largely unvalidated and lacks specificity. All evidence is inferred and needs validation. No sources or data provided. Governance is weak with placeholder risks. Stop/defer is present but minimal."
+    "notes": "Report is a draft with many placeholders; needs more specificity and validation."
   },
   "reportSummary": {
-    "maxPriorities": 6,
-    "evidenceStatements": 10,
+    "maxPriorities": 5,
+    "evidenceStatements": 9,
     "riskReviews": 3
   }
 }

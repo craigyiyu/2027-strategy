@@ -417,7 +417,7 @@ export function normalizeReport(v: unknown): unknown {
   const dr = obj(o.decisionRecord);
   if ('confirmedDecision' in dr) dr.confirmedDecision = stmtOf(dr.confirmedDecision);
   for (const k of ['pendingOwnerDecisions', 'revisitTriggers', 'approvedBy']) {
-    if (!Array.isArray(dr[k])) dr[k] = asStrArray(dr[k]);
+    dr[k] = asStrArray(dr[k]); // always coerce: strings stay, objects dropped
   }
   if (typeof dr.reviewCadence !== 'string') dr.reviewCadence = 'Monthly during the first quarter.';
   o.decisionRecord = dr;

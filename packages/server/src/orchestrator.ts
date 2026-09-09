@@ -455,8 +455,23 @@ export class Orchestrator {
       });
       throw new DomainError('wrong_state', 'Report output was invalid and could not be repaired.');
     }
-    this.repo.createReport(session.id, check.data);
-    return check.data;
+    // AI-012: hard cap of three strategic priorities. Overflow is preserved in
+    // the decision record as follow-on items rather than dropped silently.
+    const reportData = check.data;
+    if (reportData.actionPortfolio.length > 3) {
+      const overflow = reportData.actionPortfolio.slice(3);
+      reportData.actionPortfolio = reportData.actionPortfolio.slice(0, 3);
+      reportData.decisionRecord.pendingOwnerDecisions = [
+        ...reportData.decisionRecord.pendingOwnerDecisions,
+        ...overflow.map((o) => `Review follow-on action (post-first-90-days): ${o.action}`),
+      ];
+      reportData.limitations = [
+        ...(reportData.limitations ?? []),
+        'Some proposed actions were listed beyond the three strategic priorities and are recorded as follow-on review items.',
+      ];
+    }
+    this.repo.createReport(session.id, reportData);
+    return reportData;
   }
 
   hasConsent(sessionId: string, purpose: string): boolean {
