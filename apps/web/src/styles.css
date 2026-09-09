@@ -2365,10 +2365,32 @@ main {
 @media (max-width: 620px) {
   body {
     font-size: 16px;
+    overflow-x: hidden;
   }
 
   .container {
     padding: 0 16px;
+  }
+
+  .topbar-inner {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+
+  .topbar-nav {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-link {
+    font-size: 0.9rem;
+    min-height: 40px;
+  }
+
+  .lang-switch button {
+    padding: 6px 8px;
+    font-size: 0.82rem;
+    min-height: 36px;
   }
 
   .topbar-inner {

@@ -23,6 +23,10 @@ Records: source-status facts, accepted deviations, environment decisions and ope
 
 ## 2. Accepted deviations / interpretations (requirement-tracked)
 
+| ID | Reason | Impact | Risk | Temporary behavior | Proposed resolution |
+|---|---|---|---|---|---|
+| FR-008/009 (edit UX) | Session safe-state returns stage ids, not response ids, so the dedicated editAnswer route is not reachable from the UI in this build | Users cannot edit a past answer from the review/report views in v1 | Medium | SPA shows an honest explanatory card; re-answering the current stage works; report superseding on server edits is tested | Expose response ids (or an answer-edit capability) in the session payload in the next iteration |
+
 None yet — to be appended during implementation if any P0 cannot be met literally. Intent is zero silent P0 removals.
 
 ## 3. Adjustable defaults chosen while owner decisions are pending (safe, reversible)

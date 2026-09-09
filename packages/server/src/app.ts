@@ -65,6 +65,41 @@ export function createApp(deps: AppDeps) {
 
   app.get('/api/health', (c) => c.json({ ok: true, name: '2027-strategy' }));
 
+  // Optional static hosting of the built SPA (apps/web/dist) for single-port preview.
+  const webDist = process.env.WEB_DIST;
+  if (webDist) {
+    const MIME: Record<string, string> = {
+      '.html': 'text/html; charset=utf-8',
+      '.js': 'text/javascript',
+      '.css': 'text/css',
+      '.json': 'application/json',
+      '.svg': 'image/svg+xml',
+      '.png': 'image/png',
+      '.ico': 'image/x-icon',
+      '.woff2': 'font/woff2',
+    };
+    app.get('*', async (c, next) => {
+      if (c.req.path.startsWith('/api')) return next();
+      const { readFileSync, existsSync } = await import('node:fs');
+      const { join, normalize } = await import('node:path');
+      const base = normalize(webDist);
+      const urlPath = c.req.path === '/' ? '/index.html' : (c.req.path.split('?')[0] ?? '/');
+      const file = normalize(join(base, urlPath));
+      const safe = file.startsWith(base);
+      const fallback = join(base, 'index.html');
+      const candidates = safe && existsSync(file) ? [file] : [fallback];
+      try {
+        const chosen = candidates[0] ?? join(base, 'index.html');
+      const body = readFileSync(chosen);
+      const ext = chosen.slice(chosen.lastIndexOf('.'));
+        c.header('Content-Type', MIME[ext] ?? 'application/octet-stream');
+        return c.body(body);
+      } catch {
+        return c.notFound();
+      }
+    });
+  }
+
   /* ------------------------- session lifecycle ------------------------- */
 
   app.post('/api/session', async (c) => {

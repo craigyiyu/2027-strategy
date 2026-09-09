@@ -49,8 +49,10 @@ export function nextStageAfter(stage: CoreStageId): CoreStageId | null {
 export function qualityOfAnswer(answer: string, stage: CoreStageId): Exclude<QualityLabel, 'skipped'> {
   const text = (answer ?? '').trim();
   if (!text) return 'vague';
-  const words = text.split(/\s+/).length;
-  if (words < 6) return 'vague';
+  const cjkChars = (text.match(/[\u4e00-\u9fff]/g) ?? []).length;
+  const words = text.split(/[\s，。；、,.!?;:]+/).filter(Boolean).length;
+  const effectiveUnits = Math.max(words, Math.ceil(cjkChars / 3));
+  if (effectiveUnits < 6) return 'vague';
   if (
     stage === 'Q3' &&
     /(launch|implement|roll\s?out|上线|实施|推出)/i.test(text) &&
