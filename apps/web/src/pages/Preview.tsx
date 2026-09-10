@@ -93,6 +93,9 @@ export default function Preview() {
       } else if (err instanceof ApiError && err.code === 'ai_failed') {
         setPreviewState('error');
         setPreviewError('ai_failed');
+      } else if (err instanceof ApiError && err.code === 'insufficient_input') {
+        setPreviewState('error');
+        setPreviewError('insufficient');
       } else if (err instanceof ApiError && err.status === 0) {
         setPreviewState('error');
         setPreviewError('network');
@@ -269,7 +272,9 @@ export default function Preview() {
               ? t.errors.network
               : previewError === 'ai_failed'
                 ? t.errors.aiFailed
-                : t.errors.generic
+                : previewError === 'insufficient'
+                  ? t.errors.insufficientInput
+                  : t.errors.generic
           }
           onRetry={() => void fetchPreview()}
         />

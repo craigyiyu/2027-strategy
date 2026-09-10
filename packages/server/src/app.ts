@@ -323,7 +323,18 @@ export function createApp(deps: AppDeps) {
         return c.json({ ok: true, preview: out.preview });
       }
       if (out.status === 'failed') {
-        return c.json({ ok: false, code: 'report_failed', status: 'failed', message: 'Report generation failed. Please retry.' }, 502);
+        const insufficient = /insufficient|substantive/i.test(out.error ?? '');
+        return c.json(
+          {
+            ok: false,
+            code: insufficient ? 'insufficient_input' : 'report_failed',
+            status: 'failed',
+            message: insufficient
+              ? 'Not enough substantive answers yet. Return to the interview and add detail to at least five questions.'
+              : 'Report generation failed. Please retry.',
+          },
+          502,
+        );
       }
       return c.json({ ok: true, status: 'generating' }, 202);
     } catch (err) {

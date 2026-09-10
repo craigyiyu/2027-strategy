@@ -143,7 +143,9 @@ export default function Report() {
           ? 'network'
           : err instanceof ApiError && err.code === 'ai_failed'
             ? 'ai_failed'
-            : 'generic',
+            : err instanceof ApiError && err.code === 'insufficient_input'
+              ? 'insufficient'
+              : 'generic',
       );
       setGate({ phase: 'error' });
     } finally {
