@@ -1,0 +1,82 @@
+{
+  "provider": "live",
+  "results": [
+    {
+      "scenario": "AI-001",
+      "stage": "Q1",
+      "expectedReason": "missing decision owner/scope → asks who owns / by when",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "Could you specify the key elements or areas of focus for the strategy direction and who will be responsible for leading the decision-making process?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-002",
+      "stage": "Q3",
+      "expectedReason": "activity-only outcome → asks observable result",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "Could you specify which areas of the company will implement AI and what measurable outcomes will indicate successful implementation?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-003",
+      "stage": "Q4",
+      "expectedReason": "symptom stated as cause → mechanism + alternative",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "Could you provide specific examples or data that illustrate how poor customer experience is manifesting and impacting the desired outcome?",
+      "targetedMatch": false,
+      "isSingleQuestion": true,
+      "passes": false
+    },
+    {
+      "scenario": "AI-004",
+      "stage": "Q5",
+      "expectedReason": "eight equal priorities → force pivotal + exclusion",
+      "quality": "too_many_priorities",
+      "needsFollowup": true,
+      "followup": "Could you identify the single most critical priority among AI, innovation, customers, growth, talent, digital, culture, and brand, given resource constraints?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-005",
+      "stage": "Q6",
+      "expectedReason": "task variants presented as options → require different guiding policy",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "Could you provide more specific details on what each stage (AI enablement, AI adoption, and centre of excellence) entails, where you plan to focus your efforts, and what trade-offs or sacrifices are associated with this approach?",
+      "targetedMatch": true,
+      "isSingleQuestion": true,
+      "passes": true
+    },
+    {
+      "scenario": "AI-006",
+      "stage": "Q7",
+      "expectedReason": "claim without evidence → ask consequential assumptions/evidence",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "Could you please elaborate on the specific capabilities and tools that are critical for the success of the preferred option, and how they contribute to the expected outcomes?",
+      "targetedMatch": false,
+      "isSingleQuestion": true,
+      "passes": false
+    },
+    {
+      "scenario": "AI-007",
+      "stage": "Q8",
+      "expectedReason": "action without decision threshold → ask continue/adjust/pause/stop condition",
+      "quality": "vague",
+      "needsFollowup": true,
+      "followup": "Could you specify the metrics or criteria that will be used to evaluate the AI pilot's success or failure?",
+      "targetedMatch": false,
+      "isSingleQuestion": true,
+      "passes": false
+    }
+  ]
+}

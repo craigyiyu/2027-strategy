@@ -13,6 +13,21 @@ import { logger } from '../logger';
 import type { AssessContext, LlmProviderOptions, ReflectContext, ReportContext } from './types';
 import { buildAssessPrompt, buildReflectPrompt, buildReportPrompt } from './prompts';
 
+/**
+ * MiniMax M2.x (and some reasoning models) wrap chain-of-thought in
+ * <think>…</think> inside `message.content`. Strip that (and stray markdown
+ * fences) and extract the JSON object before parsing.
+ */
+export function extractJsonPayload(raw: string): string {
+  let out = raw ?? '';
+  out = out.replace(/<(think|thinking|reasoning)>[\s\S]*?<\/\1>/gi, '');
+  out = out.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '');
+  const first = out.indexOf('{');
+  const last = out.lastIndexOf('}');
+  if (first !== -1 && last > first) out = out.slice(first, last + 1);
+  return out.trim();
+}
+
 interface ChatMessage {
   role: 'system' | 'user';
   content: string;
@@ -24,7 +39,10 @@ export class LiveProvider {
     fastModel: string;
     strongModel: string;
     promptVersion: string;
+    maxTokens: number;
   };
+
+  private supportsJsonMode: boolean;
 
   constructor(o: LlmProviderOptions) {
     if (!o.apiKey) throw new Error('LiveProvider requires an API key');
@@ -35,7 +53,9 @@ export class LiveProvider {
       fastModel: o.fastModel ?? 'deepseek-chat',
       strongModel: o.strongModel ?? 'deepseek-chat',
       promptVersion: o.promptVersion,
+      maxTokens: o.maxTokens ?? 8000,
     };
+    this.supportsJsonMode = true;
     this.meta = { modelId: this.opts.fastModel, promptVersion: this.opts.promptVersion, provider: 'live' };
   }
 
@@ -46,26 +66,48 @@ export class LiveProvider {
     ];
     const url = `${this.opts.baseUrl.replace(/\/$/, '')}/chat/completions`;
     const started = Date.now();
-    const res = await fetch(url, {
+    const payload: Record<string, unknown> = {
+      model,
+      messages,
+      temperature: 0.0, // deterministic for assess/report stability
+      max_tokens: this.opts.maxTokens,
+    };
+    if (!this.supportsJsonMode) {
+      // some providers/models reject response_format (400) — remember and skip it
+    } else {
+      payload.response_format = { type: 'json_object' };
+    }
+    let res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.opts.apiKey}`,
       },
-      body: JSON.stringify({
-        model,
-        messages,
-        temperature: 0.0, // deterministic for assess/report stability
-        response_format: { type: 'json_object' },
-        max_tokens: 8000,
-      }),
+      body: JSON.stringify(payload),
       signal: AbortSignal.timeout(this.opts.timeoutMs),
     });
-    const latency = Date.now() - started;
+    let latency = Date.now() - started;
+    let bodyText = '';
     if (!res.ok) {
-      const body = await res.text().catch(() => '');
-      logger.error('llm', `provider http ${res.status}`, { latencyMs: latency, status: res.status });
-      throw new Error(`llm provider error ${res.status}: ${body.slice(0, 200)}`);
+      bodyText = await res.text().catch(() => '');
+      // graceful degradation: retry once without response_format
+      if (res.status === 400 && /response_format/i.test(bodyText) && this.supportsJsonMode) {
+        logger.warn('llm', 'provider rejected response_format; retrying without it', { model });
+        this.supportsJsonMode = false;
+        delete payload.response_format;
+        res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.opts.apiKey}` },
+          body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(this.opts.timeoutMs),
+        });
+        latency = Date.now() - started;
+        if (!res.ok) bodyText = await res.text().catch(() => '');
+      }
+      if (!res.ok) {
+        logger.error('llm', `provider http ${res.status}`, { latencyMs: latency, status: res.status });
+        throw new Error(`llm provider error ${res.status}: ${bodyText.slice(0, 200)}`);
+      }
     }
     const json = (await res.json()) as {
       choices?: Array<{ message?: { content?: string } }>;
@@ -87,7 +129,7 @@ export class LiveProvider {
   ): Promise<T> {
     let parsed: unknown;
     try {
-      parsed = JSON.parse(raw);
+      parsed = JSON.parse(extractJsonPayload(raw));
     } catch {
       throw new Error('llm invalid json');
     }
@@ -100,7 +142,7 @@ export class LiveProvider {
       );
       const repairedRaw = await this.chat(model, system, `${user}\n\nYour previous output failed validation. Fix ONLY these issues and return the complete corrected JSON (same schema).\nIssues: ${issues}`);
       try {
-        parsed = JSON.parse(repairedRaw);
+        parsed = JSON.parse(extractJsonPayload(repairedRaw));
       } catch {
         throw new Error('llm invalid json after repair');
       }
@@ -135,7 +177,7 @@ export class LiveProvider {
   ): Promise<T> {
     let parsed: unknown;
     try {
-      parsed = JSON.parse(raw);
+      parsed = JSON.parse(extractJsonPayload(raw));
     } catch {
       throw new Error('llm invalid json');
     }
@@ -146,7 +188,7 @@ export class LiveProvider {
       );
       const repairedRaw = await this.chat(model, system, `${user}\n\nFix ONLY these issues and return the complete corrected JSON (same schema).\nIssues: ${issues}`);
       try {
-        parsed = JSON.parse(repairedRaw);
+        parsed = JSON.parse(extractJsonPayload(repairedRaw));
       } catch {
         throw new Error('llm invalid json after repair');
       }
@@ -314,7 +356,7 @@ export function normalizeReport(v: unknown): unknown {
   const cx = obj(o.crux);
   if ('cruxStatement' in cx) cx.cruxStatement = stmtOf(cx.cruxStatement);
   if ('whyNow' in cx) cx.whyNow = asStatements(cx.whyNow);
-  if (!Array.isArray(cx.alternativesConsidered)) cx.alternativesConsidered = [];
+  cx.alternativesConsidered = asStrArray(cx.alternativesConsidered); // always coerce to string[]
   o.crux = cx;
 
   // --- alternatives ---

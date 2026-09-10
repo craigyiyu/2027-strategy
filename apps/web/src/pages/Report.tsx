@@ -23,7 +23,9 @@ import {
   ApiError,
   getReport,
   getSession,
+  fetchPreviewState,
   getPreview,
+  getReportStatus,
   resendReport,
   submitFeedback,
   newIdempotencyKey,
@@ -115,10 +117,24 @@ export default function Report() {
     document.title = t.meta.title;
   }, [t]);
 
+  /**
+   * Trigger generation and poll until the background job finishes
+   * (reasoning models can take minutes; the HTTP request itself stays short).
+   */
   const generateNow = async (): Promise<void> => {
     setGenerating(true);
     try {
-      await getPreview(token);
+      const state = await fetchPreviewState(token);
+      if (state.kind === 'generating') {
+        const deadline = Date.now() + 10 * 60 * 1000;
+        for (;;) {
+          await new Promise((r) => setTimeout(r, 4000));
+          const st = await getReportStatus(token);
+          if (st.status === 'ready' || st.hasReport) break;
+          if (st.status === 'failed') throw new ApiError(502, 'report_failed', st.error ?? 'failed');
+          if (Date.now() > deadline) throw new ApiError(504, 'timeout', 'generation timed out');
+        }
+      }
       const res = await getReport(token);
       setGate({ phase: 'ready', report: res.report });
     } catch (err) {
@@ -227,6 +243,11 @@ export default function Report() {
           <Button variant="primary" onClick={() => void generateNow()} disabled={generating}>
             {generating ? t.common.saving : t.report.generateAction}
           </Button>
+          {generating ? (
+            <p className="field-hint" role="status" aria-live="polite">
+              {t.preview.generatingBody}
+            </p>
+          ) : null}
         </div>
       </PageShell>
     );

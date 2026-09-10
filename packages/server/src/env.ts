@@ -10,11 +10,15 @@ const envSchema = z.object({
   ADMIN_TOKEN: z.string().default(''),
 
   LLM_MODE: z.enum(['live', 'fake', 'deterministic']).default('deterministic'),
+  // LLM_API_KEY is the generic key; DEEPSEEK_API_KEY kept for backward compat
+  LLM_API_KEY: z.string().optional().default(''),
   DEEPSEEK_API_KEY: z.string().optional().default(''),
+  MINIMAX_API_KEY: z.string().optional().default(''),
   LLM_BASE_URL: z.string().url().default('https://api.deepseek.com'),
   LLM_FAST_MODEL: z.string().default('deepseek-chat'),
   LLM_STRONG_MODEL: z.string().default('deepseek-chat'),
   LLM_TIMEOUT_MS: z.coerce.number().int().min(1000).default(60000),
+  LLM_MAX_TOKENS: z.coerce.number().int().min(256).default(8000),
   LLM_MAX_RETRIES: z.coerce.number().int().min(0).max(3).default(1),
 
   EMAIL_PROVIDER: z.enum(['console', 'smtp']).default('console'),

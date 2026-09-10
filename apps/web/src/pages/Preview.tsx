@@ -9,7 +9,8 @@ import type { PreviewResponse } from '@2027strategy/shared';
 import { useSession, useSessionLang } from '../session';
 import {
   ApiError,
-  getPreview,
+  fetchPreviewState,
+  getReportStatus,
   newIdempotencyKey,
   submitDelivery,
 } from '../api';
@@ -22,7 +23,7 @@ import { IconArrowRight, IconMail } from '../components/icons';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-type PreviewLoad = 'idle' | 'loading' | 'ready' | 'error';
+type PreviewLoad = 'idle' | 'loading' | 'generating' | 'ready' | 'error';
 
 export default function Preview() {
   const { session, token, load, error, reload } = useSession();
@@ -46,19 +47,44 @@ export default function Preview() {
   const [deliverError, setDeliverError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const fetchInFlight = useRef(false);
+  const [elapsed, setElapsed] = useState(0);
+  const pollTimer = useRef<number | null>(null);
 
   const emailId = useFieldId('delivery-email');
   const firstId = useFieldId('delivery-first');
 
+  const clearPoll = () => {
+    if (pollTimer.current !== null) {
+      window.clearTimeout(pollTimer.current);
+      pollTimer.current = null;
+    }
+  };
+
+  /**
+   * Report generation runs server-side in the background (reasoning models can
+   * take minutes, longer than any single HTTP request should live). Poll until
+   * it is ready.
+   */
   const fetchPreview = async (): Promise<void> => {
     if (!token || fetchInFlight.current) return;
     fetchInFlight.current = true;
-    setPreviewState('loading');
     setPreviewError(null);
     try {
-      const res = await getPreview(token);
-      setPreview(res.preview);
-      setPreviewState('ready');
+      const state = await fetchPreviewState(token);
+      if (state.kind === 'ready') {
+        clearPoll();
+        setPreview(state.preview);
+        setPreviewState('ready');
+      } else if (state.kind === 'generating') {
+        setPreviewState('generating');
+        clearPoll();
+        pollTimer.current = window.setTimeout(() => {
+          void fetchPreview();
+        }, 4000);
+      } else {
+        setPreviewState('error');
+        setPreviewError('generic');
+      }
     } catch (err) {
       if (err instanceof ApiError && err.status === 409) {
         // reflection not confirmed yet — route to review
@@ -78,6 +104,16 @@ export default function Preview() {
       fetchInFlight.current = false;
     }
   };
+
+  // elapsed-seconds ticker while generating (progress feedback)
+  useEffect(() => {
+    if (previewState !== 'generating') return;
+    const started = Date.now();
+    const id = window.setInterval(() => setElapsed(Math.round((Date.now() - started) / 1000)), 1000);
+    return () => window.clearInterval(id);
+  }, [previewState]);
+
+  useEffect(() => () => clearPoll(), []);
 
   useEffect(() => {
     document.title = t.meta.title;
@@ -213,6 +249,16 @@ export default function Preview() {
         <p className="page-subtitle" role="status">
           {t.common.loading}
         </p>
+      ) : null}
+
+      {previewState === 'generating' ? (
+        <div className="callout" role="status" aria-live="polite">
+          <h2 className="preview-label">{t.preview.generatingTitle}</h2>
+          <p className="page-subtitle">{t.preview.generatingBody}</p>
+          <p className="field-hint">
+            {t.preview.generatingElapsed.replace('{s}', String(elapsed))}
+          </p>
+        </div>
       ) : null}
 
       {previewState === 'error' ? (

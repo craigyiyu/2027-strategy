@@ -149,6 +149,39 @@ export class Repo {
     );
   }
 
+  setReportJob(sessionId: string, status: 'idle' | 'generating' | 'ready' | 'failed', error?: string | null): void {
+    this.db
+      .prepare(
+        'UPDATE sessions SET report_job_status = ?, report_job_error = ?, report_job_started_at = ?, updated_at = ? WHERE id = ?',
+      )
+      .run(status, error ?? null, status === 'generating' ? nowIso() : null, nowIso(), sessionId);
+  }
+
+  getReportJob(sessionId: string): { status: string; error: string | null; startedAt: string | null } {
+    const row = this.db
+      .prepare('SELECT report_job_status AS status, report_job_error AS error, report_job_started_at AS startedAt FROM sessions WHERE id = ?')
+      .get(sessionId) as { status: string; error: string | null; startedAt: string | null } | undefined;
+    return row ?? { status: 'idle', error: null, startedAt: null };
+  }
+
+  setReflectionJson(sessionId: string, reflection: unknown): void {
+    this.db
+      .prepare('UPDATE sessions SET reflection_json = ?, updated_at = ? WHERE id = ?')
+      .run(JSON.stringify(reflection), nowIso(), sessionId);
+  }
+
+  getReflectionJson<T = unknown>(sessionId: string): T | null {
+    const row = this.db
+      .prepare('SELECT reflection_json AS r FROM sessions WHERE id = ?')
+      .get(sessionId) as { r: string | null } | undefined;
+    if (!row?.r) return null;
+    try {
+      return JSON.parse(row.r) as T;
+    } catch {
+      return null;
+    }
+  }
+
   setReportTokenHash(sessionId: string, hash: string): void {
     this.db
       .prepare('UPDATE sessions SET report_token_hash = ? WHERE id = ?')

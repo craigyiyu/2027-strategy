@@ -355,6 +355,44 @@ export function getPreview(
   return request(`/api/session/${encodeURIComponent(token)}/preview`);
 }
 
+export interface ReportStatusResponse {
+  ok: true;
+  status: 'idle' | 'generating' | 'ready' | 'failed';
+  error: string | null;
+  hasReport: boolean;
+}
+
+/** Poll target while the server generates a report in the background. */
+export function getReportStatus(token: string): Promise<ReportStatusResponse> {
+  return request(`/api/session/${encodeURIComponent(token)}/report/status`);
+}
+
+export type PreviewState =
+  | { kind: 'ready'; preview: PreviewResponse }
+  | { kind: 'generating' }
+  | { kind: 'failed'; message: string };
+
+/**
+ * Fetch the preview, tolerating 202 (generation still running in background).
+ */
+export async function fetchPreviewState(token: string): Promise<PreviewState> {
+  let res: Response;
+  try {
+    res = await fetch(`/api/session/${encodeURIComponent(token)}/preview`);
+  } catch {
+    throw new ApiError(0, 'network', 'Network request failed.');
+  }
+  if (res.status === 202) return { kind: 'generating' };
+  if (!res.ok) {
+    const detail = await readErrorBody(res);
+    throw new ApiError(res.status, detail.code ?? 'http', detail.message ?? `Request failed with status ${res.status}.`, detail);
+  }
+  const body = (await res.json()) as { ok: boolean; preview?: PreviewResponse; status?: string };
+  if (body.preview) return { kind: 'ready', preview: body.preview };
+  if (body.status === 'generating') return { kind: 'generating' };
+  return { kind: 'failed', message: 'Report generation failed.' };
+}
+
 export interface DeliveryPayload {
   email: string;
   firstName?: string;

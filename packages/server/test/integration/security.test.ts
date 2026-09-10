@@ -304,3 +304,62 @@ type EmailServiceShim = {
   sendDeletionReceipt(i: { to: string }): Promise<{ ok: boolean }>;
   sendConsentConfirmation(i: { to: string }): Promise<{ ok: boolean }>;
 };
+
+describe('async report generation contract (long-running models)', () => {
+  it('returns 202 + status while generating, then the preview when ready', async () => {
+    const db = openDatabase();
+    migrate(db);
+    const repo3 = new Repo(db, new FieldCipher('', 'slow-secret-24-characters-min'));
+    // slow provider: every LLM call takes ~3s (report path exceeds the inline budget)
+    const orch3 = new Orchestrator(repo3, new FakeProvider({ fakeBehavior: 'slow', promptVersion: 't', timeoutMs: 5000 } as never));
+    const app3 = createApp({
+      repo: repo3,
+      orchestrator: orch3,
+      admin: new AdminService(repo3, 20),
+      analytics: new AnalyticsService(repo3),
+      email: new ConsoleEmailProvider(e),
+      env: e,
+    });
+    const mk = await app3.request('http://localhost/api/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ language: 'en', lens: 'business', roleBand: 'owner', industryBand: 'other', privacyMode: 'save' }),
+    });
+    const { token } = (await mk.json()) as { token: string };
+    for (let i = 0; i < 8; i++) {
+      const stage = CORE_STAGES[i]!;
+      await app3.request(`http://localhost/api/session/${token}/answer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ stageId: stage, answer: `Slow-path answer ${stage} with owner, deadline Q4 and measurable outcome.`, idempotencyKey: `sl-${stage}-0000001` }),
+      });
+    }
+    await app3.request(`http://localhost/api/session/${token}/reflection`, { method: 'POST' });
+    await app3.request(`http://localhost/api/session/${token}/reflection/confirm`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ corrections: '', confirmation: 'confirm', idempotencyKey: 'sl-confirm-0000001' }),
+    });
+    // first preview request: generation exceeds the inline budget → 202
+    const first = await app3.request(`http://localhost/api/session/${token}/preview`, { method: 'GET' });
+    expect([200, 202]).toContain(first.status);
+    if (first.status === 202) {
+      const body = (await first.json()) as { status?: string };
+      expect(body.status).toBe('generating');
+    }
+    // status endpoint exists and reports a known state
+    const st = await app3.request(`http://localhost/api/session/${token}/report/status`, { method: 'GET' });
+    expect(st.status).toBe(200);
+    const stBody = (await st.json()) as { status: string };
+    expect(['idle', 'generating', 'ready', 'failed']).toContain(stBody.status);
+    // eventually ready (background task keeps running)
+    let ready = false;
+    for (let i = 0; i < 20 && !ready; i++) {
+      await new Promise((r) => setTimeout(r, 500));
+      const g = await app3.request(`http://localhost/api/session/${token}/report/status`, { method: 'GET' });
+      const gb = (await g.json()) as { status: string; hasReport: boolean };
+      ready = gb.status === 'ready' || gb.hasReport;
+    }
+    expect(ready, 'report should finish in the background').toBe(true);
+  }, 40_000);
+});

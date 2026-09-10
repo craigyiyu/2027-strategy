@@ -5,6 +5,13 @@
  */
 import Database from 'better-sqlite3';
 
+export const SCHEMA_MIGRATIONS_V2 = `
+  ALTER TABLE sessions ADD COLUMN report_job_status TEXT NOT NULL DEFAULT 'idle';
+  ALTER TABLE sessions ADD COLUMN report_job_error TEXT;
+  ALTER TABLE sessions ADD COLUMN report_job_started_at TEXT;
+  ALTER TABLE sessions ADD COLUMN reflection_json TEXT;
+`;
+
 export const SCHEMA_MIGRATIONS: string[] = [
   // v1 — initial private-beta schema
   `
@@ -155,6 +162,8 @@ export const SCHEMA_MIGRATIONS: string[] = [
   );
   CREATE INDEX idx_analytics_name ON analytics_events(name);
   `,
+  // v2 — async report generation + cached reflection
+  SCHEMA_MIGRATIONS_V2,
 ];
 
 export function openDatabase(filename = ':memory:'): Database.Database {

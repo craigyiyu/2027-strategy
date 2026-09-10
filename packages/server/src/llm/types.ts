@@ -55,7 +55,9 @@ export interface LlmProviderOptions {
   fastModel?: string;
   strongModel?: string;
   timeoutMs?: number;
+  /** max output tokens (reasoning models need headroom for thinking) */
+  maxTokens?: number;
   promptVersion: string;
   /** synthetic failure behavior for fake provider */
-  fakeBehavior?: 'ok' | 'invalid-json' | 'timeout' | 'empty' | 'omit-field';
+  fakeBehavior?: 'ok' | 'invalid-json' | 'timeout' | 'empty' | 'omit-field' | 'slow';
 }

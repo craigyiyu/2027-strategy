@@ -298,25 +298,45 @@ export function createApp(deps: AppDeps) {
 
   /* ------------------------- preview & delivery ------------------------- */
 
+  /**
+   * Preview. Report generation can take minutes with reasoning models, so this
+   * returns 202 {status:'generating'} when it is not ready within the inline
+   * budget; the SPA polls /report/status (keeps requests under Cloudflare's
+   * 100s origin timeout).
+   */
   app.get('/api/session/:token/preview', async (c) => {
     const s = fromSession(c);
     if (!s.usable) return s.res;
     const existed = !!repo.getActiveReport(s.row.id);
     try {
-      const preview = await orch.generatePreview(s.row);
-      if (!existed) {
-        analytics.track('report_generated', {
-          language: s.row.language,
-          lens: s.row.lens,
-          elapsedBucket: 'unknown',
-          modelRoute: 'unknown',
-        });
+      const out = await orch.generatePreviewWithBudget(s.row, 12_000);
+      if (out.status === 'ready') {
+        if (!existed) {
+          analytics.track('report_generated', {
+            language: s.row.language,
+            lens: s.row.lens,
+            elapsedBucket: 'async',
+            modelRoute: 'live',
+          });
+        }
+        analytics.track('preview_viewed', { readinessCounts: out.preview.readinessSnapshot.length });
+        return c.json({ ok: true, preview: out.preview });
       }
-      analytics.track('preview_viewed', { readinessCounts: preview.readinessSnapshot.length });
-      return c.json({ ok: true, preview });
+      if (out.status === 'failed') {
+        return c.json({ ok: false, code: 'report_failed', status: 'failed', message: 'Report generation failed. Please retry.' }, 502);
+      }
+      return c.json({ ok: true, status: 'generating' }, 202);
     } catch (err) {
       return handleError(c, err);
     }
+  });
+
+  /** Poll target for the SPA while a report generates in the background. */
+  app.get('/api/session/:token/report/status', (c) => {
+    const s = fromSession(c);
+    if (!s.usable) return s.res;
+    const job = orch.getReportJobStatus(s.row.id);
+    return c.json({ ok: true, ...job });
   });
 
   app.post('/api/session/:token/delivery', async (c) => {
@@ -330,11 +350,12 @@ export function createApp(deps: AppDeps) {
     const claim = idem.tryClaim(`d:${d.idempotencyKey}`, s.row.id);
     if (!claim.first) return c.json({ ok: true, duplicate: true, session: freshSafeState(c, s.row) });
 
-    // ensure a report exists first so the email can always include a real link
-    try {
-      await orch.ensureReport(s.row);
-    } catch (err) {
-      return handleError(c, err);
+    let reportReady = !!repo.getActiveReport(s.row.id);
+    if (!reportReady) {
+      // start generation; wait briefly so fast engines can deliver immediately
+      orch.startReportGeneration(s.row);
+      await orch.waitForReport(s.row.id, 4_000);
+      reportReady = !!repo.getActiveReport(s.row.id);
     }
 
     const consents: ConsentPurpose[] = [];
@@ -365,24 +386,34 @@ export function createApp(deps: AppDeps) {
           consents.push(o.purpose);
         }
       }
-      // transactional email independent of newsletter consent (FR-018, EMAIL-002)
-      const activeReport = repo.getActiveReport(s.row.id)!;
-      const reportJson = JSON.parse(activeReport.report_json) as {
-        strategyThesis?: string;
-        language: string;
-      };
       const reportTokenRaw = d.reportToken ?? c.req.param('token');
-      const emailRes = await email.sendReport({
-        to: contact.email_normalized,
-        firstName: contact.first_name ?? undefined,
-        language: reportJson.language as 'en' | 'zh-CN',
-        thesis: reportJson.strategyThesis ?? '',
-        reportUrl: `${env.PUBLIC_ORIGIN}/report/${reportTokenRaw}`,
-        deleteUrl: `${env.PUBLIC_ORIGIN}/delete/${reportTokenRaw}`,
-        expiryDateIso: reportExpiry(env),
-      });
-      if (!emailRes.ok) {
-        // FR-032/EMAIL-003: keep report on screen; caller can retry via /resend
+      const sendNow = async (): Promise<boolean> => {
+        const active = repo.getActiveReport(s.row.id);
+        if (!active) return false;
+        const reportJson = JSON.parse(active.report_json) as { strategyThesis?: string; language: string };
+        const res = await email.sendReport({
+          to: contact.email_normalized,
+          firstName: contact.first_name ?? undefined,
+          language: reportJson.language as 'en' | 'zh-CN',
+          thesis: reportJson.strategyThesis ?? '',
+          reportUrl: `${env.PUBLIC_ORIGIN}/report/${reportTokenRaw}`,
+          deleteUrl: `${env.PUBLIC_ORIGIN}/delete/${reportTokenRaw}`,
+          expiryDateIso: reportExpiry(env),
+        });
+        if (!res.ok) return false;
+        repo.markReportEmailSent(active.id);
+        return true;
+      };
+
+      // transactional email independent of newsletter consent (FR-018, EMAIL-002)
+      const deliveredNow = reportReady ? await sendNow() : false;
+      if (!reportReady) {
+        // generation still running: send as soon as it finishes
+        orch.startReportGeneration(s.row, async () => {
+          const ok = await sendNow();
+          if (ok) repo.updateSession(s.row.id, { status: 'report_ready' });
+        });
+      } else if (!deliveredNow) {
         repo.updateSession(s.row.id, { status: 'report_ready' });
         return c.json({
           ok: true,
@@ -390,15 +421,15 @@ export function createApp(deps: AppDeps) {
           session: freshSafeState(c, s.row),
           reportStatus: 'ready',
         });
-      }
-      repo.updateSession(s.row.id, { status: 'report_ready' });
-      repo.markReportEmailSent(activeReport.id);
-      if (consents.some((p) => p !== 'report_delivery')) {
-        await email.sendConsentConfirmation({
-          to: contact.email_normalized,
-          language: row_lang(s.row),
-          purposes: consents.filter((p) => p !== 'report_delivery'),
-        });
+      } else {
+        repo.updateSession(s.row.id, { status: 'report_ready' });
+        if (consents.some((p) => p !== 'report_delivery')) {
+          await email.sendConsentConfirmation({
+            to: contact.email_normalized,
+            language: row_lang(s.row),
+            purposes: consents.filter((p) => p !== 'report_delivery'),
+          });
+        }
       }
       analytics.track('delivery_selected', {
         emailYesNo: 'yes',
@@ -406,14 +437,23 @@ export function createApp(deps: AppDeps) {
       });
       return c.json({
         ok: true,
-        emailDelivered: true,
+        emailDelivered: deliveredNow,
         session: freshSafeState(c, s.row),
-        reportStatus: 'ready',
+        reportStatus: reportReady ? 'ready' : 'generating',
       });
     }
-    repo.updateSession(s.row.id, { status: 'report_ready' });
+    if (reportReady) {
+      repo.updateSession(s.row.id, { status: 'report_ready' });
+    } else {
+      orch.startReportGeneration(s.row);
+    }
     analytics.track('delivery_selected', { emailYesNo: 'no', consentFlags: 'none' });
-    return c.json({ ok: true, emailDelivered: false, session: freshSafeState(c, s.row), reportStatus: 'ready' });
+    return c.json({
+      ok: true,
+      emailDelivered: false,
+      session: freshSafeState(c, s.row),
+      reportStatus: reportReady ? 'ready' : 'generating',
+    });
   });
 
   /* ------------------------- report ------------------------- */

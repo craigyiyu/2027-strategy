@@ -344,7 +344,8 @@ export class Orchestrator {
       answers,
       priorExtracted,
     });
-    // cache reflection state without storing free text
+    // cache the reflection so report generation does not pay for it again
+    this.repo.setReflectionJson(session.id, reflection);
     this.repo.updateSession(session.id, { reflection_state: 'ready', status: 'reflection_ready' });
     return reflection;
   }
@@ -428,12 +429,16 @@ export class Orchestrator {
         }
       })
       .flat();
-    const reflection = await this.llm.reflect({
-      language: this.lang(session),
-      lens: session.lens,
-      answers,
-      priorExtracted,
-    });
+    const cached = this.repo.getReflectionJson<ReflectionOutput>(session.id);
+    const reflection =
+      cached ??
+      (await this.llm.reflect({
+        language: this.lang(session),
+        lens: session.lens,
+        answers,
+        priorExtracted,
+      }));
+    if (!cached) this.repo.setReflectionJson(session.id, reflection);
     const report = await this.llm.report({
       language: this.lang(session),
       lens: session.lens,
@@ -472,6 +477,106 @@ export class Orchestrator {
     }
     this.repo.createReport(session.id, reportData);
     return reportData;
+  }
+
+  /** In-flight generation promises (single-process deployment). */
+  private inFlight = new Map<string, Promise<ReportOutput>>();
+
+  getReportJobStatus(sessionId: string): { status: string; error: string | null; hasReport: boolean } {
+    const job = this.repo.getReportJob(sessionId);
+    return { status: job.status, error: job.error, hasReport: !!this.repo.getActiveReport(sessionId) };
+  }
+
+  /**
+   * Kick off report generation in the background (idempotent per session).
+   * `onReady` runs after a successful generation (used to send the report email).
+   */
+  startReportGeneration(session: SessionRow, onReady?: (report: ReportOutput) => Promise<void> | void): void {
+    if (this.repo.getActiveReport(session.id)) {
+      this.repo.setReportJob(session.id, 'ready');
+      return;
+    }
+    if (this.inFlight.has(session.id)) return;
+    this.repo.setReportJob(session.id, 'generating');
+    const task = (async () => {
+      const fresh = this.repo.getSessionById(session.id);
+      if (!fresh) throw new DomainError('not_found', 'Session disappeared');
+      const report = await this.ensureReport(fresh);
+      this.repo.setReportJob(session.id, 'ready');
+      if (onReady) await onReady(report);
+      return report;
+    })();
+    this.inFlight.set(session.id, task);
+    task
+      .catch((err) => {
+        const msg = err instanceof Error ? err.message.slice(0, 200) : String(err);
+        this.repo.setReportJob(session.id, 'failed', msg);
+        logger.warn('orchestration', 'async report generation failed', { session: session.id.slice(0, 8) });
+      })
+      .finally(() => this.inFlight.delete(session.id));
+  }
+
+  /** Wait (bounded) for an in-flight generation to settle. */
+  async waitForReport(sessionId: string, budgetMs: number): Promise<boolean> {
+    const task = this.inFlight.get(sessionId);
+    if (!task) return !!this.repo.getActiveReport(sessionId);
+    const settled = await Promise.race([
+      task.then(() => true).catch(() => true),
+      new Promise<boolean>((resolve) => setTimeout(() => resolve(false), budgetMs)),
+    ]);
+    return settled || !!this.repo.getActiveReport(sessionId);
+  }
+
+  /**
+   * Return the preview if the report is ready, otherwise start/continue async
+   * generation and wait at most `budgetMs` (keeps HTTP requests short so that
+   * Cloudflare's 100s origin timeout is never hit).
+   */
+  async generatePreviewWithBudget(
+    session: SessionRow,
+    budgetMs: number,
+  ): Promise<{ status: 'ready'; preview: PreviewResponse } | { status: 'generating' } | { status: 'failed'; error: string | null }> {
+    // FR-014/FUNC-012: preview requires an explicitly confirmed reflection
+    if (session.reflection_state !== 'confirmed' && session.status !== 'preview_ready') {
+      throw new DomainError('wrong_state', 'Preview requires a confirmed reflection');
+    }
+    const existing = this.repo.getActiveReport(session.id);
+    if (existing) {
+      return { status: 'ready', preview: await this.buildPreview(session, existing.report_json) };
+    }
+    this.startReportGeneration(session);
+    const task = this.inFlight.get(session.id);
+    const settled = task
+      ? await Promise.race([
+          task.then(() => true).catch(() => true),
+          new Promise<boolean>((resolve) => setTimeout(() => resolve(false), budgetMs)),
+        ])
+      : false;
+    if (settled) {
+      const done = this.repo.getActiveReport(session.id);
+      if (done) return { status: 'ready', preview: await this.buildPreview(session, done.report_json) };
+      const job = this.repo.getReportJob(session.id);
+      if (job.status === 'failed') return { status: 'failed', error: job.error };
+    }
+    return { status: 'generating' };
+  }
+
+  private async buildPreview(session: SessionRow, reportJson: string): Promise<PreviewResponse> {
+    void session;
+    const report = JSON.parse(reportJson) as ReportOutput;
+    const pending =
+      report.decisionRecord.pendingOwnerDecisions?.[0] ??
+      (report.riskReviews.length ? report.riskReviews[0]!.risk : 'Confirm owners and thresholds before execution.');
+    return {
+      schemaVersion: report.schemaVersion,
+      language: report.language,
+      strategyThesis: report.strategyThesis,
+      pivotalChallenge: report.challengeDiagnosis.confirmedDiagnosis.text,
+      proposedPriorities: report.actionPortfolio.slice(0, 3).map((a) => a.action),
+      stopDefer: report.stopDefer[0]?.text ?? '',
+      unresolvedTension: pending,
+      readinessSnapshot: report.readinessSnapshot,
+    };
   }
 
   hasConsent(sessionId: string, purpose: string): boolean {

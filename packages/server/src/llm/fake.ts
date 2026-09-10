@@ -26,6 +26,8 @@ export class FakeProvider {
         return new Promise((_, rej) => setTimeout(() => rej(new Error('llm timeout')), 5));
       case 'invalid-json':
         return Promise.resolve('{not valid json' as unknown as T);
+      case 'slow':
+        return new Promise((resolve) => setTimeout(() => resolve(result), 3_000));
       case 'omit-field':
         // drop a required top-level field of the report shape
         if (Array.isArray(result)) return Promise.resolve(result);
