@@ -168,6 +168,62 @@ export const PERSONAS: Record<'A' | 'B' | 'C' | 'D' | 'E', PersonaFixture> = {
 };
 
 /** Sample preview fixture used by the deterministic shell (Milestone 1). */
+export interface SampleReportPreview {
+  thesis: string;
+  crux: string;
+  priorities: string[];
+  stopDefer: string[];
+  readiness: Array<{ label: string; level: 'green' | 'amber' | 'red' }>;
+  decisionExcerpt: string;
+  reviewer: string;
+}
+
+export const SAMPLE_REPORT_PREVIEW_EN: SampleReportPreview = {
+  thesis: 'Establish a single cross-property identity and consented data foundation that two priority guest journeys can use by Q4 2027.',
+  crux: 'Whether the gap between guest identity ownership and shared data standards can be closed in two pilots without expanding into a second major platform initiative in the same half-year.',
+  priorities: [
+    'Approve a single identity and consent service with named business owners by mid-November.',
+    'Stand up the two priority guest journeys on a thin shared layer in Q1, with a 30-day data standard adoption metric.',
+    'Hold the second major platform initiative until the two pilots prove value, and freeze any property-by-property app rebuild for the same period.',
+  ],
+  stopDefer: [
+    'Defer property-by-property app rebuilds until the shared identity service is in production.',
+    'Defer the second major platform initiative until the pilots prove value with named business owners.',
+  ],
+  readiness: [
+    { label: 'Diagnosis clarity', level: 'green' },
+    { label: 'Choice clarity', level: 'green' },
+    { label: 'Evidence readiness', level: 'amber' },
+    { label: 'Execution ownership', level: 'green' },
+    { label: 'Risk governance', level: 'amber' },
+  ],
+  decisionExcerpt: 'Two priority guest journeys on a thin shared layer; shared identity service by mid-November. Reviewed when the pilots reach 30-day adoption.',
+  reviewer: 'Anonymized CTO scenario · demo copy',
+};
+
+export const SAMPLE_REPORT_PREVIEW_ZH: SampleReportPreview = {
+  thesis: '到 2027 年底，搭建统一的跨物业身份与经同意的数据基础，让两条优先宾客旅程可以共用。',
+  crux: '两条优先旅程能否在不做第二个大型平台项目的前提下，借两条试点在六个月内验证身份与数据标准。',
+  priorities: [
+    '11 月中前完成统一身份与同意服务的选型，并指定具名业务负责人。',
+    'Q1 用薄共享层承载两条优先宾客旅程，30 天数据标准采用率为硬指标。',
+    '将第二个大型平台项目延后到试点验证完成之后再启动；同期冻结各物业 App 重建。',
+  ],
+  stopDefer: [
+    '统一身份服务上线前，暂不进行各物业 App 重建。',
+    '试点未验证价值前，暂不启动第二个大型平台项目。',
+  ],
+  readiness: [
+    { label: '诊断清晰度', level: 'green' },
+    { label: '选择清晰度', level: 'green' },
+    { label: '证据就绪度', level: 'amber' },
+    { label: '执行责任', level: 'green' },
+    { label: '风险治理', level: 'amber' },
+  ],
+  decisionExcerpt: '两条优先宾客旅程承载于薄共享层；统一身份服务 11 月中上线。 试点达 30 天采用率时复审。',
+  reviewer: '匿名 CTO 场景 · 演示内容',
+};
+
 export const SAMPLE_PREVIEW: PreviewResponse = {
   schemaVersion: '1.0',
   language: 'en',
